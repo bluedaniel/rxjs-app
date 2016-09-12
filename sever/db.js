@@ -1,13 +1,10 @@
-var records = [
-  { id: 1, username: 'daniel', password: 'password', displayName: 'Daniel', emails: [ { value: 'daniel@example.com' } ] },
-  { id: 2, username: 'jill', password: 'password', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
-];
+const users = require('./users.json');
 
 exports.findById = function (id, cb) {
   process.nextTick(() => {
     var idx = id - 1;
-    if (records[idx]) {
-      cb(null, records[idx]);
+    if (users[idx]) {
+      cb(null, users[idx]);
     } else {
       cb(new Error('User ' + id + ' does not exist'));
     }
@@ -16,8 +13,8 @@ exports.findById = function (id, cb) {
 
 exports.findByUsername = function (username, cb) {
   process.nextTick(() => {
-    for (var i = 0, len = records.length; i < len; i++) {
-      var record = records[i];
+    for (var i = 0, len = users.length; i < len; i++) {
+      var record = users[i];
       if (record.username === username) {
         return cb(null, record);
       }

@@ -7,19 +7,26 @@ import stylesFa from 'font-awesome/css/font-awesome.css';
 
 const { header, div, a } = hh(h);
 
-const loggedIn = () =>
-  div(classSet('right'), [
+const loggedIn = () => [
+  div([
+    a(classSet(stylesFa.fa, stylesFa['fa-search']), { on: {
+      click: e => link('/search')
+    } })
+  ]),
+  div([
     a(classSet(stylesFa.fa, stylesFa['fa-user']), { on: {
       click: e => link('/account')
     } })
-  ]);
+  ])
+];
 
-const guest = () =>
-  div(classSet('right'), [
+const guest = () => [
+  div([
     a(classSet(stylesFa.fa, stylesFa['fa-unlock']), { on: {
       click: e => link('/login')
     } }, '')
-  ]);
+  ])
+];
 
 export const Header = ({ state: { accountStore: { user } } }) =>
   header(classSet(styles.header), [
@@ -28,5 +35,10 @@ export const Header = ({ state: { accountStore: { user } } }) =>
         click: e => link('/')
       } })
     ]),
-    isEmpty(user) ? guest() : loggedIn()
+    div([
+      a(classSet(stylesFa.fa, stylesFa['fa-info-circle']), { on: {
+        click: e => link('/about')
+      } })
+    ]),
+    ...(isEmpty(user) ? guest() : loggedIn())
   ]);

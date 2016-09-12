@@ -1,4 +1,23 @@
-.h5 {
+.h5,
+.tagline {
   margin: 0;
   padding: 20px 15px;
+}
+
+.tagline {
+  padding-top: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0 15px 15px;
+  .img {
+    height: 32px;
+    width: 32px;
+    margin-right: 1em;
+  }
+  p {
+    margin: 0;
+  }
 }

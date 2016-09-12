@@ -4,6 +4,7 @@ const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
 const db = require('./db');
+const searchData = require('./search.json');
 
 const PORT = 8000;
 
@@ -39,20 +40,21 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
-const renderHtml = (req, res) => {
-  if (req.user) {
-    return res.sendFile(path.resolve('public/app.html'));
-  }
+const renderHtml = loginRequired => (req, res) => {
+  if (req.user) return res.sendFile(path.resolve('public/app.html'));
+  if (loginRequired) return res.send('Not found', 404);
+
   return res.sendFile(path.resolve('public/guest.html'));
 };
 
-app.get('/', renderHtml);
-app.get('/about', renderHtml);
-app.get('/login', renderHtml);
-app.get('/logout', renderHtml);
-app.get('/account', renderHtml);
-app.get('/search', renderHtml);
-app.get('/search/:id', renderHtml);
+app.get('/', renderHtml());
+app.get('/about', renderHtml());
+app.get('/login', renderHtml());
+app.get('/logout', renderHtml());
+
+app.get('/account', renderHtml(true));
+app.get('/search', renderHtml(true));
+app.get('/search/:id', renderHtml(true));
 
 app.post('/api/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
@@ -93,6 +95,20 @@ app.get('/api/user', require('connect-ensure-login').ensureLoggedIn(), (req, res
     results: [{
       'user': req.user
     }]
+  });
+});
+
+app.get('/api/search', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
+  res.json({
+    status: 200,
+    results: searchData
+  });
+});
+
+app.get('/api/search/:coords', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
+  res.json({
+    status: 200,
+    results: searchData.reverse()
   });
 });
 

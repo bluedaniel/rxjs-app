@@ -15,11 +15,6 @@
     color: #fafafa;
     flex: 1;
     font-size: 27px;
-    &:global(.center) {
-      text-align: center;
-    }
-    &:global(.right) {
-      text-align: right;
-    }
+    text-align: center;
   }
 }
