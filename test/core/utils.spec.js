@@ -18,14 +18,3 @@ test('[core/utils] safe', t => {
   t.is(safe(() => foo), undefined);
   t.is(safe(() => bar, 'baz'), 'baz');
 });
-
-test('[core/utils] nanoToSeconds', t => {
-  t.is(nanoToSeconds(500000), 0.5);
-  t.is(nanoToSeconds(123123311), 123.123311);
-});
-
-test('[core/utils] toCurrency', t => {
-  t.is(toCurrency(1), '1.00');
-  t.is(toCurrency(100), '100.00');
-  t.is(toCurrency(0.5), '0.50');
-});
