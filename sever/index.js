@@ -69,7 +69,7 @@ app.post('/api/login', (req, res, next) => {
 
     req.logIn(user, err => {
       if (err) { return next(err); }
-      return res.json({
+      res.json({
         status: 200,
         results: [{
           'user_id': user.id
@@ -81,7 +81,7 @@ app.post('/api/login', (req, res, next) => {
 
 app.post('/api/logout', (req, res) => {
   req.logout();
-  return res.json({
+  res.json({
     status: 200,
     results: [{
       'user': {}

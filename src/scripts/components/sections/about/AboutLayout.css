@@ -1,9 +1,7 @@
 .hero {
-  /*background-image: url('../../../../../public/img/about-hero.jpeg');*/
-  background-position: 50% 75%;
-  background-size: cover;
+  background: linear-gradient(to left, #005c97, #363795);
+  height: calc(100vh - 50px);
   > div {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.5));
     padding: 100px 10px;
     text-align: center;
     h3 {

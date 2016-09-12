@@ -18,7 +18,7 @@ const userView = ({ displayName }) =>
 export const HomeLayout = ({ state: { accountStore: { user } } }) => {
   const guestView = div([
     h4('Home'),
-    a(classSet('btn btn-primary'), { on: {
+    a(classSet('btn'), { on: {
       click: e => link('/login')
     } }, 'Login'),
     hr(''),

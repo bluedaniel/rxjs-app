@@ -1,9 +1,9 @@
 .hero {
   > div {
-    text-align: center;
+    background: linear-gradient(to left, #134e5e, #71b280);
     height: calc(100vh - 310px);
-    background: linear-gradient(to left, #232526, #414345);
     padding: 130px 10px;
+    text-align: center;
     h4 {
       color: white;
       line-height: 1.2;
@@ -14,7 +14,9 @@
     background: linear-gradient(to left, #673ab7, #512da8);
   }
   hr {
-    border: 1px solid;
+    background: linear-gradient(to right, #134e5e, #71b280);
+    border: none;
+    height: 1px;
     margin: 30px;
   }
 }

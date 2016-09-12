@@ -1,4 +1,3 @@
-import { identity } from 'lodash/fp';
 import { actions } from 'actions/';
 import { post, request } from 'core/fetch';
 import { URLS } from 'constants/URLS';
@@ -9,5 +8,5 @@ export const logout$ = () =>
       success: $ => $.do(() => {
         window.location.href = '/';
       })
-      .map(() => identity)
+      .delay(2000)
     }));
