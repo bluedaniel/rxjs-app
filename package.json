@@ -17,7 +17,7 @@
     "test": "npm run lint && NODE_PATH=src/scripts nyc ava",
     "report": "npm test && nyc report --reporter=html",
     "build": "NODE_ENV=production webpack",
-    "docker-build": "docker build -t mytab-nginx-user .",
+    "docker-build": "docker build -t rxjsapp-nginx-user .",
     "watch": "webpack-dev-server --content-base public --port 3000",
     "lint": "stylelint \"src/**/*.css\" && eslint --ext .js --ext .jsx src/scripts"
   },
