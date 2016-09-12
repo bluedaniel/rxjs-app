@@ -1,0 +1,10 @@
+{
+  "extends": "standard",
+  "rules": {
+    "semi": [2, "always"],
+    "camelcase": [0, {"properties": "never"}]
+  },
+  "globals": {
+    "fetch": true
+  }
+}

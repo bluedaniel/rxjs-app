@@ -1,0 +1,103 @@
+{
+  "name": "rxjs-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluedaniel/rxjs-app.git"
+  },
+  "author": "Daniel Levitt <daniellevitt86@gmail.com> (https://github.com/bluedaniel)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bluedaniel/rxjs-app/issues"
+  },
+  "homepage": "https://github.com/bluedaniel/rxjs-app#readme",
+  "scripts": {
+    "test": "npm run lint && NODE_PATH=src/scripts nyc ava",
+    "report": "npm test && nyc report --reporter=html",
+    "build": "NODE_ENV=production webpack",
+    "docker-build": "docker build -t mytab-nginx-user .",
+    "watch": "webpack-dev-server --content-base public --port 3000",
+    "lint": "stylelint \"src/**/*.css\" && eslint --ext .js --ext .jsx src/scripts"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ],
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      }
+    }
+  },
+  "ava": {
+    "files": [
+      "test/**/*.spec.js"
+    ],
+    "source": [
+      "src/**/*.js"
+    ],
+    "failFast": true,
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ],
+    "babel": "inherit"
+  },
+  "dependencies": {
+    "history": "^4.0.0-2",
+    "immutable": "^3.8.1",
+    "lodash": "^4.15.0",
+    "rxjs": "^5.0.0-beta.11",
+    "snabbdom": "^0.5.2",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-2": "^6.13.0",
+    "babel-register": "^6.14.0",
+    "babel-runtime": "^6.11.6",
+    "body-parser": "^1.15.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "css-loader": "^0.25.0",
+    "eslint": "^3.4.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "file-loader": "^0.9.0",
+    "font-awesome": "^4.6.3",
+    "lost": "^7.1.0",
+    "morgan": "^1.7.0",
+    "normalize.css": "^4.2.0",
+    "nyc": "^8.1.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "postcss": "^5.1.2",
+    "postcss-cssnext": "^2.6.0",
+    "postcss-custom-media": "^5.0.1",
+    "postcss-font-magician": "^1.4.0",
+    "postcss-import": "^8.1.0",
+    "postcss-loader": "^0.13.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-url": "^5.1.2",
+    "stylelint": "^7.2.0",
+    "stylelint-config-standard": "^13.0.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.1.0-beta.21",
+    "webpack-dev-server": "^1.15.1"
+  }
+}

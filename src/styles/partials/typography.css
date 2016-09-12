@@ -1,0 +1,102 @@
+body {
+  word-wrap: break-word;
+  hyphens: auto;
+  color: #29323c;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  margin-top: 0;
+  color: #29323c;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 4em;
+  margin-bottom: 2.42424rem;
+}
+
+h2 {
+  font-size: 3.33333em;
+  margin-bottom: 2.0202rem;
+}
+
+h3 {
+  font-size: 2.66667em;
+  margin-bottom: 1.61616rem;
+}
+
+h4 {
+  font-size: 2em;
+  margin-bottom: 1.21212rem;
+}
+
+h5 {
+  font-size: 1.33333em;
+  margin-bottom: 0.80808rem;
+}
+
+h6 {
+  font-size: 1em;
+  margin-bottom: 0.60606rem;
+}
+
+p {
+  margin: auto auto 1.5rem;
+}
+
+small {
+  font-size: 65%;
+}
+
+input,
+abbr,
+acronym,
+blockquote,
+code,
+kbd,
+q,
+samp,
+var {
+  hyphens: none;
+}
+
+blockquote + figcaption cite {
+  display: block;
+  font-size: inherit;
+  text-align: right;
+}
+
+pre {
+  white-space: pre;
+  code {
+    white-space: pre-wrap;
+    word-wrap: normal;
+  }
+}
+
+code {
+  white-space: pre;
+  font-family: monospace;
+}
+
+abbr {
+  font-variant: small-caps;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: gray;
+  &[title]:hover {
+    cursor: help;
+  }
+}
+
+a {
+  text-decoration: none;
+}

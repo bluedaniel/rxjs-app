@@ -1,0 +1,23 @@
+.errors {
+  position: fixed;
+  top: 50px;
+  width: 100%;
+  background: rgba(212, 60, 60, 0.8);
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  z-index: 9998;
+  &:global(.active) {
+    padding: 15px;
+    width: calc(100% - 30px);
+  }
+  > p {
+    color: white;
+    margin: 0;
+    + p {
+      margin-top: 11px;
+      padding-top: 11px;
+      border-top: 1px dotted rgba(212, 60, 60, 0.3);
+    }
+  }
+}

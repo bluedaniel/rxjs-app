@@ -1,0 +1,25 @@
+.header {
+  align-items: center;
+  background: linear-gradient(to right bottom, #485563, #29323c);
+  border-bottom: 1px solid color(#29323c alpha(-50%));
+  display: flex;
+  flex-wrap: wrap;
+  height: 50px;
+  left: 0;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: calc(100% - 40px);
+  z-index: 9999;
+  > div {
+    color: #fafafa;
+    flex: 1;
+    font-size: 27px;
+    &:global(.center) {
+      text-align: center;
+    }
+    &:global(.right) {
+      text-align: right;
+    }
+  }
+}

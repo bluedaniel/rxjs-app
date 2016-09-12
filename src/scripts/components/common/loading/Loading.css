@@ -1,0 +1,70 @@
+.loading {
+  animation: backgroundGradient 20s ease infinite;
+  background-size: 300% 300%;
+  background-image: linear-gradient(270deg, #00c6ff, #0072ff);
+  border-radius: 80px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+  left: 50%;
+  margin: 0 auto;
+  position: fixed;
+  top: 80px;
+  transform: translateX(-50%);
+  z-index: 3;
+  span {
+    color: #fff;
+    display: inline-block;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    line-height: 26px;
+    margin: 7px 21px 7px 45px;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+.spinner {
+  height: 25px;
+  left: 10px;
+  position: absolute;
+  top: 7px;
+  width: 25px;
+}
+
+.bounce1,
+.bounce2 {
+  animation: sk-bounce 2s infinite ease-in-out;
+  background-color: white;
+  border-radius: 50%;
+  height: 100%;
+  left: 0;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.bounce2 {
+  animation-delay: -1s;
+}
+
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes backgroundGradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
