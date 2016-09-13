@@ -2,8 +2,6 @@ import { uuid } from 'core/utils';
 
 const toastTimeout = 5000;
 
-const toastPath = [ 'toastStore', 'toasts' ];
-
 export const toastStore = {
   defaultState () {
     return {
@@ -17,14 +15,15 @@ export const toastStore = {
     const toasts = Array.isArray(toast) ? toast : [ toast ];
     const formattedToasts = toasts.map(e => ({ id: uuid(), ...e, time: Date.now() }));
     return state => {
-      const toasts = state.getIn(toastPath);
-      return state.setIn(toastPath, toasts.concat(formattedToasts));
+      const toasts = state.toastStore.toasts.concat(formattedToasts);
+      return ({ ...state, toastPath: { toasts } });
     };
   },
   removeToasts () {
     return state => {
-      return state.setIn(toastPath, state.getIn(toastPath).filter(({ time }) =>
-        time && time >= Date.now() - toastTimeout));
+      const toasts = state.toastStore.toasts.filter(({ time }) =>
+        time && time >= Date.now() - toastTimeout);
+      return ({ ...state, toastPath: { toasts } });
     };
   }
 };

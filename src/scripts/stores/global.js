@@ -6,7 +6,6 @@ export const globalStore = {
     };
   },
   toggleLoading (loading = false, loadingText = 'Loading') {
-    return (state) =>
-      state.mergeIn([ 'globalStore' ], { loading, loadingText });
+    return (state) => ({ ...state, globalStore: { loading, loadingText } });
   }
 };

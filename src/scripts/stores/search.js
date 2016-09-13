@@ -7,6 +7,6 @@ export const searchStore = {
   },
   updateResults (searchResults) {
     return state =>
-      state.mergeIn([ 'searchStore' ], { searchResults });
+      ({ ...state, searchStore: { searchResults } });
   }
 };

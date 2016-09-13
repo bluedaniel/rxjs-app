@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { fromJS } from 'immutable';
 import { createBrowserHistory } from 'history';
 import * as stores from 'stores/';
 import { onRouteActions } from 'core/router';
@@ -24,8 +23,7 @@ export const stateDriver = () => {
   // Zip all the streams so they emit only on the last
   return Observable.zip(...initialStates$)
   .combineAll((...args) =>
-    args.reduce((acc, curr) => ({ ...acc, ...curr }), defaultState))
-  .map(fromJS);
+    args.reduce((acc, curr) => ({ ...acc, ...curr }), defaultState));
 };
 
 export const behaviourDriver = (state$, behaviours) =>
@@ -45,6 +43,6 @@ export const historyDriver = (state$, guest) => {
   .startWith(history.location);
 
   return history$.withLatestFrom(state$, ({ pathname }, state) =>
-    onRouteActions({ state: state.toJS(), pathname }, guest))
+    onRouteActions({ state, pathname }, guest))
   .filter(identity);
 };

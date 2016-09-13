@@ -18,11 +18,9 @@ export const accountStore = {
     });
   },
   setUser (user) {
-    return state =>
-      state.mergeIn([ 'accountStore', 'user' ], user);
+    return state => ({ ...state, accountStore: { user } });
   },
   clearUser () {
-    return state =>
-      state.setIn([ 'accountStore', 'user' ], {});
+    return state => ({ ...state, accountStore: { user: {} } });
   }
 };

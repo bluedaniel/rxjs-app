@@ -4,7 +4,6 @@ import { App } from 'components/app';
 
 export const DOM$ = state$ =>
   state$.filter(identity)
-  .map(state => state.toJS()) // Views use js objects rather than immutable
   .filter(({ routeStore: { currentRoute } }) => currentRoute)
   .sampleTime(1000 / 60) // Rerender at a maximum of 60fps
   .do(logState)

@@ -2,8 +2,6 @@ import { uuid } from 'core/utils';
 
 const errorTimeout = 4000;
 
-const errPath = [ 'errorStore', 'errors' ];
-
 export const errorStore = {
   defaultState () {
     return {
@@ -17,14 +15,15 @@ export const errorStore = {
     const errs = Array.isArray(err) ? err : [ err ];
     const formattedErrs = errs.map(e => ({ id: uuid(), ...e, time: Date.now() }));
     return state => {
-      const errors = state.getIn(errPath);
-      return state.setIn(errPath, errors.concat(formattedErrs));
+      const errors = state.errorStore.errors.concat(formattedErrs);
+      return ({ ...state, errorStore: { errors } });
     };
   },
   removeErrors () {
     return state => {
-      return state.setIn(errPath, state.getIn(errPath).filter(({ time }) =>
-        time && time >= Date.now() - errorTimeout));
+      const errors = state.errorStore.errors.filter(({ time }) =>
+        time && time >= Date.now() - errorTimeout);
+      return ({ ...state, errorStore: { errors } });
     };
   }
 };

@@ -6,9 +6,12 @@ export const routeStore = {
     };
   },
   setRoute ({ matchedRoute, params }) {
-    return state => state.mergeIn([ 'routeStore' ], {
-      currentRoute: matchedRoute,
-      currentParams: params
-    });
+    return state =>
+      ({ ...state,
+        routeStore: {
+          currentRoute: matchedRoute,
+          currentParams: params
+        }
+      });
   }
 };
