@@ -9,14 +9,14 @@ In this boilerplate app, the `state$` ultimately performs a simple Snabbdom patc
 
 Features
 --------
-- Hyperscript instead of JSX
+- Hyperscript, with some useful utilities, for creating components
 - Webpack v2 config with:
   - Tree-shaking
   - Bundle splitting (one each for guests & authenticated users)
   - PostCSS with plugins
   - CSS Modules
 - RxJs v5 brings improvements in speed, features, documentation and modular builds.
-- Uses Lodash/fp for a more FP approach around the app.
+- Uses Ramda for composable state changes and stitching composite views.
 - Modern testing with Ava
 - Robust linting using Eslint & Stylelint.
 - Lightweight Express development server with authentication
@@ -38,7 +38,6 @@ $ node server
 
 Build
 -----
-
 
 ````bash
 $ npm run bundle && npm run docker-build && npm run docker-run
