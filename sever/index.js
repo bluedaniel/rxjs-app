@@ -93,24 +93,22 @@ app.post('/api/logout', (req, res) => {
 });
 
 app.get('/api/user', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (!user || err) {
-      return next(res.json({
-        errors: [{
-          code: 401,
-          message: 'Unauthorised'
-        }],
-        results: [],
-        status: 200
-      }));
-    }
-
-    res.json({
-      errors: [],
-      results: [ req.user ],
+  if (!req.user) {
+    return res.json({
+      errors: [{
+        code: 401,
+        message: 'Unauthorised'
+      }],
+      results: [],
       status: 200
     });
-  })(req, res, next);
+  }
+
+  return res.json({
+    errors: [],
+    results: [ req.user ],
+    status: 200
+  });
 });
 
 app.get('/api/search', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
