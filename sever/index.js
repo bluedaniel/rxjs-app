@@ -60,10 +60,12 @@ app.post('/api/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (!user || err) {
       return next(res.json({
-        status: 401,
-        error: [
-          'Incorrect password'
-        ]
+        errors: [{
+          code: 401,
+          message: 'Unauthorised'
+        }],
+        results: [],
+        status: 200
       }));
     }
 
@@ -71,6 +73,7 @@ app.post('/api/login', (req, res, next) => {
       if (err) { return next(err); }
       res.json({
         status: 200,
+        errors: [],
         results: [{
           'user_id': user.id
         }]
@@ -89,13 +92,25 @@ app.post('/api/logout', (req, res) => {
   });
 });
 
-app.get('/api/user', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
-  res.json({
-    status: 200,
-    results: [{
-      'user': req.user
-    }]
-  });
+app.get('/api/user', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (!user || err) {
+      return next(res.json({
+        errors: [{
+          code: 401,
+          message: 'Unauthorised'
+        }],
+        results: [],
+        status: 200
+      }));
+    }
+
+    res.json({
+      errors: [],
+      results: [ req.user ],
+      status: 200
+    });
+  })(req, res, next);
 });
 
 app.get('/api/search', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
