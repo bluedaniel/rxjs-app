@@ -1,24 +1,21 @@
 RxJs App
 ========
 
-Architecture
-------------
-
 This is a boilerplate application that uses Observable streams in a Flux based architecture.
 
 All `actions$` and `drivers$` (side-effects) are themselves observable functions and update one single `state$` stream.
 
 In this boilerplate app, the `state$` ultimately performs a simple Snabbdom patch function with the old & new state to render the App.
 
-Boilerplate features
---------------------
+Features
+--------
 - Hyperscript instead of JSX
-- Webpack v2
+- Webpack v2 config with:
   - Tree-shaking
-  - Bundle splitting (bundle for both guests & authenticated users)
-- CSS Modules
-- PostCSS with plugins
-- RxJs v5 brings improvements in speed, features, documentation and smaller builds.
+  - Bundle splitting (one each for guests & authenticated users)
+  - PostCSS with plugins
+  - CSS Modules
+- RxJs v5 brings improvements in speed, features, documentation and modular builds.
 - Uses Lodash/fp for a more FP approach around the app.
 - Modern testing with Ava
 - Robust linting using Eslint & Stylelint.
