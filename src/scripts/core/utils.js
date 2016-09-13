@@ -1,26 +1,33 @@
 import compose from 'ramda/src/compose';
+import concat from 'ramda/src/concat';
 import filter from 'ramda/src/filter';
 import head from 'ramda/src/head';
 import identity from 'ramda/src/identity';
 import is from 'ramda/src/is';
+import isArrayLike from 'ramda/src/isArrayLike';
 import isEmpty from 'ramda/src/isEmpty';
 import join from 'ramda/src/join';
 import length from 'ramda/src/length';
 import lens from 'ramda/src/lens';
+import lensPath from 'ramda/src/lensPath';
 import lensProp from 'ramda/src/lensProp';
 import map from 'ramda/src/map';
 import match from 'ramda/src/match';
+import of from 'ramda/src/of';
 import once from 'ramda/src/once';
 import prop from 'ramda/src/prop';
 import propEq from 'ramda/src/propEq';
 import set from 'ramda/src/set';
 import slice from 'ramda/src/slice';
 import trim from 'ramda/src/trim';
+import unless from 'ramda/src/unless';
+import view from 'ramda/src/view';
 import { tagNames } from 'constants/tagNames';
 
 export {
-  compose, filter, head, identity, is, isEmpty, join, length, lens, lensProp,
-  map, match, once, prop, propEq, set, slice, trim
+  compose, concat, filter, head, identity, is, isArrayLike, isEmpty, join,
+  length, lens, lensPath, lensProp, map, match, of, once, prop, propEq, set,
+  slice, trim, unless, view
 };
 
 export const uuid = () => {
@@ -33,6 +40,8 @@ export const noop = () => {};
 export const safe = (fn, or = undefined) => {
   try { return fn(); } catch (e) { return or; }
 };
+
+export const coerceArray = unless(isArrayLike, of);
 
 const padEnd = (n, c = '0') => v =>
   String(v).length >= n ? '' + v : (String(c).repeat(n) + v).slice(-n);

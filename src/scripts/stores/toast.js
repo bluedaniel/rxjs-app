@@ -1,31 +1,28 @@
-import { compose, set, lensProp, uuid } from 'core/utils';
+import {
+  compose, concat, set, filter, lensPath, view, uuid, coerceArray
+} from 'core/utils';
 
-const toastTimeout = 5000;
-
-const storeLens = lensProp('toastStore');
+const toastLens = lensPath([ 'toastStore', 'toasts' ]);
 
 export const toastStore = {
   defaultState () {
-    return {
-      toasts: []
-    };
+    return { toasts: [] };
   },
-  getTimeoutLength () {
-    return toastTimeout;
+  getTimeout () {
+    return 5000;
   },
   addToast (toast) {
-    const toasts = Array.isArray(toast) ? toast : [ toast ];
-    const formattedToasts = toasts.map(e => ({ id: uuid(), ...e, time: Date.now() }));
+    const createToast = e => ({ id: uuid(), ...e, time: Date.now() });
     return state => {
-      const toasts = state.toastStore.toasts.concat(formattedToasts);
-      return compose(set(storeLens, { toasts }))(state);
+      const toasts = compose(concat(coerceArray(toast).map(createToast)), view(toastLens))(state);
+      return compose(set(toastLens, toasts))(state);
     };
   },
   removeToasts () {
     return state => {
-      const toasts = state.toastStore.toasts.filter(({ time }) =>
-        time && time >= Date.now() - toastTimeout);
-      return compose(set(storeLens, { toasts }))(state);
+      const filterTime = ({ time }) => time >= Date.now() - toastStore.getTimeout();
+      const toasts = compose(filter(filterTime), view(toastLens))(state);
+      return compose(set(toastLens, toasts))(state);
     };
   }
 };
