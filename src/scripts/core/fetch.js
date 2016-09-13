@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { identity, compose, head, pluck, isEqual, isEmpty, isObject } from 'lodash/fp';
+import { identity, compose, filter, isEmpty, propEq, is, prop, length } from 'ramda';
 import { globalStore } from 'stores/';
 import { warn } from 'core/utils';
 import 'whatwg-fetch';
@@ -18,14 +18,17 @@ const f = method => (url, data = {}) =>
     method,
     ...(method === 'post' ? postHeaders : {}),
     ...data,
-    ...(data.body && isObject(data.body) ? { body: JSON.stringify(data.body) } : {})
+    ...(data.body && is(Object, data.body) ? { body: JSON.stringify(data.body) } : {})
   })
   .then(check)
   .then(response => response.json())
-  .catch(e => { throw e; });
+  .catch(e => {
+    console.log(e);
+    throw e;
+  });
 
-const successStatus = ({ errors }) => isEmpty(errors);
-const unauthorizedStatus = ({ errors }) => compose(isEqual(215), pluck('code'), head)(errors);
+const successStatus = compose(isEmpty, prop('errors'));
+const unauthorizedStatus = compose(length, filter(propEq('code', 215)), prop('errors'));
 const errorStatus = ({ errors }) => {
   return !successStatus({ errors }) && !unauthorizedStatus({ errors });
 };
@@ -37,8 +40,8 @@ export const request = (fnRequest, actions, {
   retry = 2,
   immediate = () => Observable.of(globalStore.toggleLoading(true, 'Fetching')),
   unauthorized = $ => $.do(_ => { window.location.href = '/'; }),
-  error = $ => $.do(({ errors }) => errors.map(err => {
-    if (!isEmpty(actions)) actions.ERROR.next(err);
+  error = $ => $.do(({ errors }) => errors.map(({ message }) => {
+    actions.ERROR$.next({ message });
   })).map(() => identity),
   success = () => identity,
   always = () => Observable.of(globalStore.toggleLoading(false, 'Fetching'))
@@ -47,9 +50,10 @@ export const request = (fnRequest, actions, {
     .retryWhen(errors$ =>
       Observable.zip(Observable.range(1, retry), errors$)
         .do(([ i, { response } ]) => warn(`Error fetching ${response}, retrying in ${i} second(s)`))
-        .mergeMap(([ i, { statusText } ]) => {
+        .mergeMap(([ i, err ]) => {
           if (i === retry) {
-            throw statusText;
+            console.log(err);
+            throw err.statusText;
           }
           return Observable.timer(i * 1000);
         }))

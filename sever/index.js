@@ -47,6 +47,9 @@ const renderHtml = loginRequired => (req, res) => {
   return res.sendFile(path.resolve('public/guest.html'));
 };
 
+const apiOK = (results) => ({ status: 200, errors: [], results });
+const apiError = (errors) => ({ status: 200, errors, results: [] });
+
 app.get('/', renderHtml());
 app.get('/about', renderHtml());
 app.get('/login', renderHtml());
@@ -59,70 +62,45 @@ app.get('/search/:id', renderHtml(true));
 app.post('/api/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (!user || err) {
-      return next(res.json({
-        errors: [{
-          code: 401,
-          message: 'Unauthorised'
-        }],
-        results: [],
-        status: 200
-      }));
+      return next(res.json(apiError([{
+        code: 401,
+        message: 'Unauthorised'
+      }])));
     }
 
     req.logIn(user, err => {
       if (err) { return next(err); }
-      res.json({
-        status: 200,
-        errors: [],
-        results: [{
-          'user_id': user.id
-        }]
-      });
+      res.json(apiOK([{
+        'user_id': user.id
+      }]));
     });
   })(req, res, next);
 });
 
 app.post('/api/logout', (req, res) => {
   req.logout();
-  res.json({
-    status: 200,
-    results: [{
-      'user': {}
-    }]
-  });
+  res.json(apiOK([{
+    'user': {}
+  }]));
 });
 
 app.get('/api/user', (req, res, next) => {
   if (!req.user) {
-    return res.json({
-      errors: [{
-        code: 401,
-        message: 'Unauthorised'
-      }],
-      results: [],
-      status: 200
-    });
+    return res.json(apiError([{
+      code: 401,
+      message: 'Unauthorised'
+    }]));
   }
 
-  return res.json({
-    errors: [],
-    results: [ req.user ],
-    status: 200
-  });
+  return res.json(apiOK([ req.user ]));
 });
 
 app.get('/api/search', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
-  res.json({
-    status: 200,
-    results: searchData
-  });
+  res.json(apiOK(searchData));
 });
 
 app.get('/api/search/:coords', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
-  res.json({
-    status: 200,
-    results: searchData.reverse()
-  });
+  res.json(apiOK(searchData.reverse()));
 });
 
 app.listen(PORT);

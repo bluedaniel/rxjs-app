@@ -1,4 +1,4 @@
-import { compose, get as _get, head, noop } from 'lodash/fp';
+import { compose, prop, head, noop } from 'ramda';
 import { get, request } from 'core/fetch';
 import { URLS } from 'constants/URLS';
 
@@ -10,10 +10,11 @@ export const accountStore = {
   },
   initialState$ () {
     return request(() => get(URLS.getUser), {}, {
-      immediate: noop,
-      always: noop,
-      error: $ => $.mapTo(accountStore.defaultState()),
-      success: $ => $.map(compose(head, _get('results')))
+      immediate: () => noop,
+      always: () => noop,
+      error: $ => $.map(accountStore.defaultState),
+      success: $ => $.map(compose(head, prop('results')))
+        .map(user => ({ user }))
     });
   },
   setUser (user) {

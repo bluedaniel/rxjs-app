@@ -1,4 +1,4 @@
-import { identity } from 'lodash/fp';
+import { identity } from 'ramda';
 import { logState } from 'core/utils';
 import { getView } from 'core/router';
 import { App } from 'components/app';

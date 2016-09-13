@@ -1,5 +1,5 @@
 import h from 'snabbdom/h';
-import { isEmpty } from 'lodash/fp';
+import { isEmpty } from 'ramda';
 import { actions } from 'actions/';
 import { link } from 'core/router';
 import { classSet, hh } from 'core/utils';
@@ -29,7 +29,7 @@ export const HomeLayout = ({ state: { accountStore: { user } } }) => {
 
   return div([
     section(classSet(styles.hero), [
-      isEmpty(user) ? guestView : userView(user)
+      !user || isEmpty(user) ? guestView : userView(user)
     ])
   ]);
 };

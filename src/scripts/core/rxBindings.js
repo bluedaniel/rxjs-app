@@ -1,8 +1,10 @@
 import 'rxjs/add/observable/defer';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/range';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/zip';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/combineAll';
 import 'rxjs/add/operator/concat';
 import 'rxjs/add/operator/delay';

@@ -1,21 +1,24 @@
 import {
-  compose, filter, head, identity, isObject, join, map, once,
-  padCharsEnd, trim, isString
-} from 'lodash/fp';
+  compose, filter, head, identity, is, join, map, once, trim
+} from 'ramda';
 import { tagNames } from 'constants/tagNames';
 
-const s4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-
-export const uuid = () => `${new Date().getTime()}${s4()}${s4()}${s4()}`;
+export const uuid = () => {
+  const s4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  return `${new Date().getTime()}${s4()}${s4()}${s4()}`;
+};
 
 export const safe = (fn, or = undefined) => {
   try { return fn(); } catch (e) { return or; }
 };
 
+const padEnd = (n, c = '0') => v =>
+  String(v).length >= n ? '' + v : (String(c).repeat(n) + v).slice(-n);
+
 export const classSet = (...args) => {
   const cn = arg => {
     if (Array.isArray(arg)) return arg.map(cn);
-    return isObject(arg) ? compose(join('.'), map(head), filter(x => x[1]), Object.entries)(arg) : arg;
+    return is(Object, arg) ? compose(join('.'), map(head), filter(x => x[1]), Object.entries)(arg) : arg;
   };
   return compose(once(x => `.${x}`), trim, join('.'), filter(identity), map(cn))(args);
 };
@@ -32,7 +35,7 @@ export const groupEnd = (console.groupEnd ? console.groupEnd : console.log).bind
 /* eslint-enable no-console */
 
 const formatTime = (t = new Date()) =>
-  compose(join(':'), map(padCharsEnd(2, '0')))([
+  compose(join(':'), map(padEnd(2)))([
     t.getHours(), t.getMinutes(), t.getSeconds(), t.getMilliseconds()
   ]);
 
@@ -50,7 +53,7 @@ export const logState = (state) => {
 
 // Hyperscript helper
 const isSelector = param => {
-  const validStr = param => isString(param) && param.length > 0;
+  const validStr = param => is(String, param) && param.length > 0;
   const startsWith = (string, start) => string[0] === start;
   return validStr(param) && startsWith(param, '.') || startsWith(param, '#');
 };

@@ -1,5 +1,5 @@
 import h from 'snabbdom/h';
-import { compose, map } from 'lodash/fp';
+import { compose, map } from 'ramda';
 import { classSet, hh } from 'core/utils';
 import styles from './SearchLayout.css';
 

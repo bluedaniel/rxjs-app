@@ -1,5 +1,5 @@
 import h from 'snabbdom/h';
-import { isEmpty } from 'lodash/fp';
+import { isEmpty } from 'ramda';
 import { classSet, hh } from 'core/utils';
 import { link } from 'core/router';
 import styles from './Header.css';

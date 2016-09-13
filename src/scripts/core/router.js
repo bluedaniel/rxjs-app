@@ -1,4 +1,4 @@
-import { compose, filter, head, thru, slice, isEqual, identity } from 'lodash/fp';
+import { compose, filter, head, slice, identity, match } from 'ramda';
 import { actions } from 'actions/';
 import { history } from 'core/drivers';
 import { guestRoutes, appRoutes } from 'routes/';
@@ -15,8 +15,8 @@ export const onRouteActions = ({
   const availableRoutes = guest ? guestRoutes[matchedRoute] : appRoutes[matchedRoute];
   const { onRoute = [], onParamChange = [] } = availableRoutes;
 
-  const newRoute = !isEqual(currentRoute, matchedRoute);
-  const newParams = !isEqual(currentParams, params);
+  const newRoute = currentRoute !== matchedRoute;
+  const newParams = currentParams !== params;
 
   if (!newRoute && !newParams) return; // No route change
 
@@ -40,8 +40,8 @@ const getMatchedRoute = (path) => {
   )(Object.keys(appRoutes)) || '/';
 
   const params = compose(
-    filter(identity), slice(1, 20), thru(a => path.match(a)), toRegex
-  )(matchedRoute);
+    filter(identity), slice(1, 20), match(toRegex(matchedRoute))
+  )(path);
 
   return { matchedRoute, params };
 };
