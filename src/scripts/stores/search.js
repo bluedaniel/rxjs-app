@@ -1,3 +1,4 @@
+import { compose, set, lensProp } from 'core/utils';
 
 export const searchStore = {
   defaultState () {
@@ -6,7 +7,6 @@ export const searchStore = {
     };
   },
   updateResults (searchResults) {
-    return state =>
-      ({ ...state, searchStore: { searchResults } });
+    return compose(set(lensProp('searchStore'), { searchResults }));
   }
 };

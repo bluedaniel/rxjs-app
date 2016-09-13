@@ -6,18 +6,21 @@ import is from 'ramda/src/is';
 import isEmpty from 'ramda/src/isEmpty';
 import join from 'ramda/src/join';
 import length from 'ramda/src/length';
+import lens from 'ramda/src/lens';
+import lensProp from 'ramda/src/lensProp';
 import map from 'ramda/src/map';
 import match from 'ramda/src/match';
 import once from 'ramda/src/once';
 import prop from 'ramda/src/prop';
 import propEq from 'ramda/src/propEq';
+import set from 'ramda/src/set';
 import slice from 'ramda/src/slice';
 import trim from 'ramda/src/trim';
 import { tagNames } from 'constants/tagNames';
 
 export {
-  compose, filter, head, identity, is, isEmpty, join, length, map, match, once,
-  prop, propEq, slice, trim
+  compose, filter, head, identity, is, isEmpty, join, length, lens, lensProp,
+  map, match, once, prop, propEq, set, slice, trim
 };
 
 export const uuid = () => {

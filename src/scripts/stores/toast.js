@@ -1,6 +1,8 @@
-import { uuid } from 'core/utils';
+import { compose, set, lensProp, uuid } from 'core/utils';
 
 const toastTimeout = 5000;
+
+const storeLens = lensProp('toastStore');
 
 export const toastStore = {
   defaultState () {
@@ -16,14 +18,14 @@ export const toastStore = {
     const formattedToasts = toasts.map(e => ({ id: uuid(), ...e, time: Date.now() }));
     return state => {
       const toasts = state.toastStore.toasts.concat(formattedToasts);
-      return ({ ...state, toastPath: { toasts } });
+      return compose(set(storeLens, { toasts }))(state);
     };
   },
   removeToasts () {
     return state => {
       const toasts = state.toastStore.toasts.filter(({ time }) =>
         time && time >= Date.now() - toastTimeout);
-      return ({ ...state, toastPath: { toasts } });
+      return compose(set(storeLens, { toasts }))(state);
     };
   }
 };

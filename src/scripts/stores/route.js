@@ -1,3 +1,5 @@
+import { compose, set, lensProp } from 'core/utils';
+
 export const routeStore = {
   defaultState () {
     return {
@@ -6,12 +8,9 @@ export const routeStore = {
     };
   },
   setRoute ({ matchedRoute, params }) {
-    return state =>
-      ({ ...state,
-        routeStore: {
-          currentRoute: matchedRoute,
-          currentParams: params
-        }
-      });
+    return compose(set(lensProp('routeStore'), {
+      currentRoute: matchedRoute,
+      currentParams: params
+    }));
   }
 };

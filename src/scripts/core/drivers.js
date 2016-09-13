@@ -32,7 +32,7 @@ export const behaviourDriver = (state$, behaviours) =>
       fn$({ state$ }).map(fn => ({ fn, type: fn$.name }))))
   .do(({ fn, type }) => logAction({ type, payload: fn }))
   .withLatestFrom(state$, ({ fn, type }, state) =>
-    fn(state)); // New state from action fn ie updateUserFn(latestState)
+    ({ ...state, ...fn(state) })); // New state from action fn ie updateUserFn(latestState)
 
 // History locatiom
 export const history = createBrowserHistory();
