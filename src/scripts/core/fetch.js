@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { identity, compose, filter, isEmpty, propEq, is, prop, length } from 'ramda';
 import { globalStore } from 'stores/';
-import { warn } from 'core/utils';
+import { identity, compose, filter, isEmpty, propEq, is, prop, length, warn } from 'core/utils';
 import 'whatwg-fetch';
 
 const postHeaders = { headers: { 'content-type': 'application/json' } };

@@ -1,5 +1,5 @@
-import { identity, prop, compose, head } from 'ramda';
 import { actions } from 'actions/';
+import { identity, prop, compose, head } from 'core/utils';
 import { post, request } from 'core/fetch';
 import { URLS } from 'constants/URLS';
 

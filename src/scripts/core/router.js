@@ -1,6 +1,6 @@
-import { compose, filter, head, slice, identity, match } from 'ramda';
 import { actions } from 'actions/';
 import { history } from 'core/drivers';
+import { compose, filter, head, slice, identity, match } from 'core/utils';
 import { guestRoutes, appRoutes } from 'routes/';
 
 export const link = (path) => history.push(path);

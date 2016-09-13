@@ -1,6 +1,5 @@
 import h from 'snabbdom/h';
-import { isEmpty } from 'ramda';
-import { classSet, hh } from 'core/utils';
+import { classSet, isEmpty, hh } from 'core/utils';
 import { link } from 'core/router';
 import styles from './Header.css';
 import stylesFa from 'font-awesome/css/font-awesome.css';

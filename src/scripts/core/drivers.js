@@ -2,10 +2,9 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { fromJS } from 'immutable';
 import { createBrowserHistory } from 'history';
-import { identity } from 'ramda';
 import * as stores from 'stores/';
 import { onRouteActions } from 'core/router';
-import { logAction } from 'core/utils';
+import { identity, logAction } from 'core/utils';
 
 // Main state stream
 export const state$ = new BehaviorSubject();

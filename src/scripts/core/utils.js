@@ -1,12 +1,31 @@
-import {
-  compose, filter, head, identity, is, join, map, once, trim
-} from 'ramda';
+import compose from 'ramda/src/compose';
+import filter from 'ramda/src/filter';
+import head from 'ramda/src/head';
+import identity from 'ramda/src/identity';
+import is from 'ramda/src/is';
+import isEmpty from 'ramda/src/isEmpty';
+import join from 'ramda/src/join';
+import length from 'ramda/src/length';
+import map from 'ramda/src/map';
+import match from 'ramda/src/match';
+import once from 'ramda/src/once';
+import prop from 'ramda/src/prop';
+import propEq from 'ramda/src/propEq';
+import slice from 'ramda/src/slice';
+import trim from 'ramda/src/trim';
 import { tagNames } from 'constants/tagNames';
+
+export {
+  compose, filter, head, identity, is, isEmpty, join, length, map, match, once,
+  prop, propEq, slice, trim
+};
 
 export const uuid = () => {
   const s4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   return `${new Date().getTime()}${s4()}${s4()}${s4()}`;
 };
+
+export const noop = () => {};
 
 export const safe = (fn, or = undefined) => {
   try { return fn(); } catch (e) { return or; }

@@ -1,8 +1,7 @@
 import h from 'snabbdom/h';
-import { isEmpty } from 'ramda';
 import { actions } from 'actions/';
 import { link } from 'core/router';
-import { classSet, hh } from 'core/utils';
+import { classSet, isEmpty, hh } from 'core/utils';
 import styles from './HomeLayout.css';
 
 const { section, div, h4, a, hr } = hh(h);

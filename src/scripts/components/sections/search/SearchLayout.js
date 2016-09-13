@@ -1,6 +1,5 @@
 import h from 'snabbdom/h';
-import { compose, map } from 'ramda';
-import { classSet, hh } from 'core/utils';
+import { classSet, hh, compose, map } from 'core/utils';
 import styles from './SearchLayout.css';
 
 const { div, h5, p } = hh(h);
