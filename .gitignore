@@ -44,3 +44,8 @@ public/*.js
 public/*.js.map
 public/*.css
 public/*.css.map
+public/*.ttf
+public/*.eot
+public/*.woff
+public/*.svg
+public/*.woff2

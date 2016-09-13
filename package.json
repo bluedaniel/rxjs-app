@@ -16,7 +16,8 @@
   "scripts": {
     "test": "npm run lint && NODE_PATH=src/scripts nyc ava",
     "report": "npm test && nyc report --reporter=html",
-    "build": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack --json > stats.json",
+    "build-size": "npm run build && cat stats.json | webpack-bundle-size-analyzer",
     "docker-build": "docker build -t rxjsapp-nginx-user .",
     "watch": "webpack-dev-server --content-base public --port 3000",
     "lint": "stylelint \"src/**/*.css\" && eslint --ext .js --ext .jsx src/scripts"
@@ -98,6 +99,7 @@
     "stylelint-config-standard": "^13.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.21",
+    "webpack-bundle-size-analyzer": "^2.0.2",
     "webpack-dev-server": "^1.15.1"
   }
 }
