@@ -6,7 +6,7 @@ import stylesFa from 'font-awesome/css/font-awesome.css';
 
 const { header, div, a } = hh(h);
 
-const loggedIn = () => [
+const loggedIn = [
   div([
     a(classSet(stylesFa.fa, stylesFa['fa-search']), { on: {
       click: e => link('/search')
@@ -19,7 +19,7 @@ const loggedIn = () => [
   ])
 ];
 
-const guest = () => [
+const guest = [
   div([
     a(classSet(stylesFa.fa, stylesFa['fa-unlock']), { on: {
       click: e => link('/login')
@@ -39,5 +39,5 @@ export const Header = ({ state: { accountStore: { user } } }) =>
         click: e => link('/about')
       } })
     ]),
-    ...(isEmpty(user) ? guest() : loggedIn())
+    ...(isEmpty(user) ? guest : loggedIn)
   ]);
