@@ -21,18 +21,20 @@ export const stateDriver = () => {
       ([ ...acc, v.initialState$().map(x => ({ [k]: x })) ]), []);
 
   // Zip all the streams so they emit only on the last
+  // [zip -> merge] if you want the app to render immediately (could overwrite some early actions)
   return Observable.zip(...initialStates$)
   .combineAll((...args) =>
     args.reduce((acc, curr) => ({ ...acc, ...curr }), defaultState));
 };
 
+// The action/behaviour streams
 export const behaviourDriver = (state$, behaviours) =>
   Observable.merge(
     ...Object.values(behaviours).map(fn$ =>
       fn$({ state$ }).map(fn => ({ fn, type: fn$.name }))))
   .do(({ fn, type }) => logAction({ type, payload: fn }))
   .withLatestFrom(state$, ({ fn, type }, state) =>
-    ({ ...state, ...fn(state) })); // New state from action fn ie updateUserFn(latestState)
+    fn(state)); // New state from action fn ie updateUserFn(latestState)
 
 // History locatiom
 export const history = createBrowserHistory();

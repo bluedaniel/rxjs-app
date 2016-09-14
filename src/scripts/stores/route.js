@@ -1,4 +1,4 @@
-import { compose, set, lensProp } from 'core/utils';
+import { compose, over, lensProp } from 'core/utils';
 
 export const routeStore = {
   defaultState () {
@@ -8,9 +8,9 @@ export const routeStore = {
     };
   },
   setRoute ({ matchedRoute, params }) {
-    return compose(set(lensProp('routeStore'), {
+    return compose(over(lensProp('routeStore'), () => ({
       currentRoute: matchedRoute,
       currentParams: params
-    }));
+    })));
   }
 };

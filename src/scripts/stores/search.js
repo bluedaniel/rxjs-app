@@ -1,4 +1,4 @@
-import { compose, set, lensProp } from 'core/utils';
+import { compose, over, lensProp } from 'core/utils';
 
 export const searchStore = {
   defaultState () {
@@ -7,6 +7,6 @@ export const searchStore = {
     };
   },
   updateResults (searchResults) {
-    return compose(set(lensProp('searchStore'), { searchResults }));
+    return compose(over(lensProp('searchStore'), () => ({ searchResults })));
   }
 };

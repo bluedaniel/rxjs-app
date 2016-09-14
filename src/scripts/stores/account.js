@@ -1,4 +1,4 @@
-import { compose, prop, head, noop, set, lensProp } from 'core/utils';
+import { compose, prop, head, noop, over, lensProp } from 'core/utils';
 import { get, request } from 'core/fetch';
 import { URLS } from 'constants/URLS';
 
@@ -20,9 +20,9 @@ export const accountStore = {
     });
   },
   setUser (user) {
-    return compose(set(storeLens, { user }));
+    return compose(over(storeLens, () => ({ user })));
   },
   clearUser () {
-    return compose(set(storeLens, { user: {} }));
+    return compose(over(storeLens, () => ({ user: {} })));
   }
 };

@@ -67,6 +67,6 @@ export const request = (fnRequest, actions, {
 };
 
 // Functions to check if API response contains errors
-const successStatus = compose(isEmpty);
+const successStatus = isEmpty;
 const unauthorizedStatus = compose(length, filter(propEq('code', 215)));
 const errorStatus = (errors) => !successStatus(errors) && !unauthorizedStatus(errors);

@@ -1,33 +1,14 @@
-import compose from 'ramda/src/compose';
-import concat from 'ramda/src/concat';
-import filter from 'ramda/src/filter';
-import head from 'ramda/src/head';
-import identity from 'ramda/src/identity';
-import is from 'ramda/src/is';
-import isArrayLike from 'ramda/src/isArrayLike';
-import isEmpty from 'ramda/src/isEmpty';
-import join from 'ramda/src/join';
-import length from 'ramda/src/length';
-import lens from 'ramda/src/lens';
-import lensPath from 'ramda/src/lensPath';
-import lensProp from 'ramda/src/lensProp';
-import map from 'ramda/src/map';
-import match from 'ramda/src/match';
-import of from 'ramda/src/of';
-import once from 'ramda/src/once';
-import prop from 'ramda/src/prop';
-import propEq from 'ramda/src/propEq';
-import set from 'ramda/src/set';
-import slice from 'ramda/src/slice';
-import trim from 'ramda/src/trim';
-import unless from 'ramda/src/unless';
-import view from 'ramda/src/view';
+import {
+  append, compose, concat, filter, head, identity, is, isArrayLike, isEmpty,
+  join, length, lens, lensPath, lensProp, merge, map, match, of, once, over,
+  prop, propEq, set, slice, trim, unless, view
+} from 'ramda';
 import { tagNames } from 'constants/tagNames';
 
 export {
-  compose, concat, filter, head, identity, is, isArrayLike, isEmpty, join,
-  length, lens, lensPath, lensProp, map, match, of, once, prop, propEq, set,
-  slice, trim, unless, view
+  append, compose, concat, filter, head, identity, is, isArrayLike, isEmpty,
+  join, length, lens, lensPath, lensProp, merge, map, match, of, once, over,
+  prop, propEq, set, slice, trim, unless, view
 };
 
 export const uuid = () => {
@@ -53,6 +34,8 @@ export const classSet = (...args) => {
   };
   return compose(once(x => `.${x}`), trim, join('.'), filter(identity), map(cn))(args);
 };
+
+export const addBasicMeta = e => merge({ id: uuid(), time: Date.now() }, e);
 
 /* eslint-disable no-console */
 export const log = console.log.bind(console);

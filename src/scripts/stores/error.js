@@ -1,5 +1,5 @@
 import {
-  compose, concat, set, filter, lensPath, view, uuid, coerceArray
+  compose, over, append, filter, lensPath, addBasicMeta
 } from 'core/utils';
 
 const errorLens = lensPath([ 'errorStore', 'errors' ]);
@@ -12,17 +12,10 @@ export const errorStore = {
     return 4000;
   },
   addError (err) {
-    const createError = e => ({ id: uuid(), ...e, time: Date.now() });
-    return state => {
-      const errors = compose(concat(coerceArray(err).map(createError)), view(errorLens))(state);
-      return compose(set(errorLens, errors))(state);
-    };
+    return compose(over(errorLens, append(addBasicMeta(err))));
   },
   removeErrors () {
-    return state => {
-      const filterTime = ({ time }) => time >= Date.now() - errorStore.getTimeout();
-      const errors = compose(filter(filterTime), view(errorLens))(state);
-      return compose(set(errorLens, errors))(state);
-    };
+    return compose(over(errorLens, filter(({ time }) =>
+      time >= Date.now() - errorStore.getTimeout())));
   }
 };

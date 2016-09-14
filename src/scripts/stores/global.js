@@ -1,4 +1,4 @@
-import { compose, set, lensProp } from 'core/utils';
+import { compose, over, lensProp } from 'core/utils';
 
 export const globalStore = {
   defaultState () {
@@ -8,6 +8,6 @@ export const globalStore = {
     };
   },
   toggleLoading (loading = false, loadingText = 'Loading') {
-    return compose(set(lensProp('globalStore'), { loading, loadingText }));
+    return compose(over(lensProp('globalStore'), () => ({ loading, loadingText })));
   }
 };
