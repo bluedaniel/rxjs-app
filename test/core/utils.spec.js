@@ -1,5 +1,5 @@
 import test from 'ava';
-import { toCurrency, nanoToSeconds, classSet, safe } from 'core/utils';
+import { classSet, noop, safe } from 'core/utils';
 
 test('[core/utils] classSet', t => {
   t.is(classSet('foobar'), '.foobar');
@@ -17,4 +17,10 @@ test('[core/utils] safe', t => {
   t.is(safe(() => 'hello'), 'hello');
   t.is(safe(() => foo), undefined);
   t.is(safe(() => bar, 'baz'), 'baz');
+});
+
+test('[core/utils] noop', t => {
+  t.is(noop(), undefined);
+  t.is(noop(true), undefined);
+  t.is(noop([]), undefined);
 });
