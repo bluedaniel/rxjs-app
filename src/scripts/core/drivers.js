@@ -14,7 +14,7 @@ export const stateDriver = () => {
   const defaultState = Object.entries(stores).reduce((acc, [ k, v ]) =>
     ({ ...acc, [k]: v.defaultState() }), {});
 
-  // initialStates$ is any initial observables in the store, ie fetch user on userStore
+  // initialStates$ is any initial observables in the store, ie fetch user
   const initialStates$ = Object.entries(stores)
     .filter(([ k, v ]) => !!v.initialState$)
     .reduce((acc, [ k, v ]) =>
@@ -36,7 +36,7 @@ export const behaviourDriver = (state$, behaviours) =>
   .withLatestFrom(state$, ({ fn, type }, state) =>
     fn(state)); // New state from action fn ie updateUserFn(latestState)
 
-// History locatiom
+// History location
 export const history = createBrowserHistory();
 
 export const historyDriver = (state$, guest) => {
@@ -45,6 +45,7 @@ export const historyDriver = (state$, guest) => {
   .startWith(history.location);
 
   return history$.withLatestFrom(state$, ({ pathname }, state) =>
+    // Actions on routes, ie /logout should perform at least api call & redirect
     onRouteActions({ state, pathname }, guest))
   .filter(identity);
 };
