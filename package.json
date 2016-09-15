@@ -19,7 +19,7 @@
     "build": "NODE_ENV=production webpack --json > stats.json",
     "build-size": "npm run build && cat stats.json | webpack-bundle-size-analyzer",
     "docker-build": "docker build -t rxjsapp-nginx-user .",
-    "watch": "webpack-dev-server --content-base public --port 8000",
+    "watch": "webpack-dev-server --content-base public --port 3000",
     "lint": "stylelint \"src/**/*.css\" && eslint --ext .js --ext .jsx src/scripts"
   },
   "babel": {
