@@ -42,13 +42,15 @@ app.use(passport.session());
 
 const renderHtml = loginRequired => (req, res) => {
   if (req.user) return res.sendFile(path.resolve('public/app.html'));
-  if (loginRequired) return res.send('Not found', 404);
+  if (loginRequired) return res.status(400).send('Not found');
 
   return res.sendFile(path.resolve('public/guest.html'));
 };
 
 const apiOK = (results) => ({ status: 200, errors: [], results });
 const apiError = (errors) => ({ status: 200, errors, results: [] });
+
+const apiUnexpected = () => ({ status: 200, test: 'test', test2: {} });
 
 app.get('/', renderHtml());
 app.get('/about', renderHtml());
@@ -96,7 +98,8 @@ app.get('/api/user', (req, res, next) => {
 });
 
 app.get('/api/search', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
-  res.json(apiOK(searchData));
+  // res.json(apiOK(searchData));
+  res.json(apiUnexpected());
 });
 
 app.get('/api/search/:coords', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
