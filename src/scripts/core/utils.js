@@ -1,6 +1,7 @@
 import append from 'ramda/src/append';
 import compose from 'ramda/src/compose';
 import concat from 'ramda/src/concat';
+import equals from 'ramda/src/equals';
 import filter from 'ramda/src/filter';
 import head from 'ramda/src/head';
 import identity from 'ramda/src/identity';
@@ -26,15 +27,15 @@ import set from 'ramda/src/set';
 import slice from 'ramda/src/slice';
 import tap from 'ramda/src/tap';
 import trim from 'ramda/src/trim';
-import unless from 'ramda/src/unless';
 import uniq from 'ramda/src/uniq';
+import unless from 'ramda/src/unless';
 import view from 'ramda/src/view';
 import { tagNames } from 'constants/tagNames';
 
 export {
-  append, compose, concat, filter, head, identity, is, isArrayLike, isEmpty,
-  join, length, lens, lensPath, lensProp, merge, not, map, match, of, once,
-  over, prop, propEq, propOr, set, slice, tap, trim, unless, uniq, view
+  append, compose, concat, equals, filter, head, identity, is, isArrayLike,
+  isEmpty, join, length, lens, lensPath, lensProp, merge, not, map, match, of, once,
+  over, prop, propEq, propOr, set, slice, tap, trim, uniq, unless, view
 };
 
 export const uuid = () => {

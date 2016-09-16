@@ -1,6 +1,6 @@
 import { actions } from 'actions/';
 import { history } from 'core/drivers';
-import { compose, filter, head, slice, identity, match } from 'core/utils';
+import { compose, equals, filter, head, slice, identity, match } from 'core/utils';
 import { guestRoutes, appRoutes } from 'routes/';
 
 // link function used to route inside the app using history
@@ -30,6 +30,9 @@ export const onRouteActions = ({
 
   return () => {
     actions.ROUTE$.next({ matchedRoute, params });
+    if (newRoute && newParams && equals(onRoute, onParamChange)) {
+      return mapActions(onRoute);
+    }
     if (newRoute) mapActions(onRoute);
     if (newParams) mapActions(onParamChange);
   };
