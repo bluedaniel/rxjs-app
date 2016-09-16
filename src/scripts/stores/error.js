@@ -17,5 +17,8 @@ export const errorStore = {
   removeErrors () {
     return compose(over(errorLens, filter(({ time }) =>
       time >= Date.now() - errorStore.getTimeout())));
+  },
+  removeError (removeId) {
+    return compose(over(errorLens, filter(({ id }) => id !== removeId)));
   }
 };

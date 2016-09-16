@@ -7,6 +7,7 @@ const actionsDriver = (...actions) =>
 export const actions = actionsDriver(
   'ROUTE',
   'ERROR',
+  'ERROR_REMOVE',
   'TOAST',
 
   'LOGIN',
