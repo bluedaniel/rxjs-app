@@ -12,4 +12,5 @@ export const DOM$ = state$ =>
     const { routeStore: { currentRoute } } = state;
     return { state, view: getView(currentRoute) };
   })
+  .filter(({ view }) => identity(view))
   .map(App); // Finally render the root el
