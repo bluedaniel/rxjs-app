@@ -50,10 +50,3 @@ $ npm run build-size
 ````
 
 Note: You will also have a stats.json file in the project root which you can use at [https://webpack.github.io/analyse/](https://webpack.github.io/analyse/), among others.
-
-Build
------
-
-````bash
-$ npm run bundle && npm run docker-build && npm run docker-run
-````
