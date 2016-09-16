@@ -15,22 +15,26 @@ import lensProp from 'ramda/src/lensProp';
 import map from 'ramda/src/map';
 import match from 'ramda/src/match';
 import merge from 'ramda/src/merge';
+import not from 'ramda/src/not';
 import of from 'ramda/src/of';
 import once from 'ramda/src/once';
 import over from 'ramda/src/over';
 import prop from 'ramda/src/prop';
 import propEq from 'ramda/src/propEq';
+import propOr from 'ramda/src/propOr';
 import set from 'ramda/src/set';
 import slice from 'ramda/src/slice';
+import tap from 'ramda/src/tap';
 import trim from 'ramda/src/trim';
 import unless from 'ramda/src/unless';
+import uniq from 'ramda/src/uniq';
 import view from 'ramda/src/view';
 import { tagNames } from 'constants/tagNames';
 
 export {
   append, compose, concat, filter, head, identity, is, isArrayLike, isEmpty,
-  join, length, lens, lensPath, lensProp, merge, map, match, of, once, over,
-  prop, propEq, set, slice, trim, unless, view
+  join, length, lens, lensPath, lensProp, merge, not, map, match, of, once,
+  over, prop, propEq, propOr, set, slice, tap, trim, unless, uniq, view
 };
 
 export const uuid = () => {
@@ -69,6 +73,8 @@ export const timeEnd = (console.timeEnd ? console.timeEnd : console.log).bind(co
 export const group = (console.groupCollapsed ? console.groupCollapsed : console.log).bind(console);
 export const groupEnd = (console.groupEnd ? console.groupEnd : console.log).bind(console);
 /* eslint-enable no-console */
+
+export const rlog = tap(log);
 
 const formatTime = (t = new Date()) =>
   compose(join(':'), map(padEnd(2)))([

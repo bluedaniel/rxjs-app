@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { globalStore } from 'stores/';
-import { identity, compose, filter, isEmpty, propEq, is, length, warn } from 'core/utils';
+import { identity, not, compose, filter, propOr, isEmpty, propEq, is, warn } from 'core/utils';
 import 'whatwg-fetch';
 
 const f = method => (url, data = {}) =>
@@ -30,9 +30,11 @@ export const request = (fnRequest, actions, {
   retry = 2,
   immediate = () => Observable.of(globalStore.toggleLoading(true, 'Fetching')),
   unauthorized = $ => $.do(_ => { window.location.href = '/'; }),
-  error = $ => $.do(({ errors }) => errors.map(({ message }) => {
+  error = $ => $.do(({ errors }) => (errors || [{ message: 'fetch :(' }]).map(({ message }) => {
+    // debugger;
     actions.ERROR$.next({ message });
-  })).map(() => identity),
+  }))
+  .map(() => identity),
   success = () => identity,
   always = () => Observable.of(globalStore.toggleLoading(false, 'Fetching'))
 }) => {
@@ -48,25 +50,33 @@ export const request = (fnRequest, actions, {
           }
           return Observable.timer(i * 1000);
         }))
-    .catch(message => Observable.of({ errors: [ { message } ] }))
-    .share();
+    .catch(err => Observable.of({ errors: [ err ] }))
+    .share()
+    .onErrorResumeNext();
 
   // Filters for emitting the correct success/auth/error stream from request
   const onResponse$ = Observable.merge(
-    unauthorized(request$.filter(({ errors }) => unauthorizedStatus(errors))),
-    error(request$.filter(({ errors }) => errorStatus(errors))),
-    success(request$.filter(({ errors }) => successStatus(errors)))
-  ).filter(identity).share();
+    unauthorized(request$.filter(unauthorizedCheck)),
+    error(request$.filter(errorCheck)),
+    success(request$.filter(successCheck))
+  );
 
   const onImmediate$ = immediate();
 
   return onImmediate$ ? onImmediate$.merge(
     onImmediate$.mergeMap(() => onResponse$),
-    onResponse$.mergeMap(always).filter(identity)
+    onResponse$.mergeMap(() => {
+      debugger;
+      return always();
+    })
   ) : onResponse$;
 };
 
 // Functions to check if API response contains errors
-const successStatus = isEmpty;
-const unauthorizedStatus = compose(length, filter(propEq('code', 215)));
-const errorStatus = (errors) => !successStatus(errors) && !unauthorizedStatus(errors);
+const successCheck = resp => {
+  const resultCheck = compose(not, isEmpty, propOr([], 'results'))(resp);
+  const errorCheck = compose(isEmpty, propOr([], 'errors'))(resp);
+  return resultCheck && errorCheck;
+};
+const unauthorizedCheck = compose(not, isEmpty, filter(propEq('code', 215)), propOr([], 'errors'));
+const errorCheck = resp => !successCheck(resp) && !unauthorizedCheck(resp);

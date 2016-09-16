@@ -32,9 +32,12 @@ export const behaviourDriver = (state$, behaviours) =>
   Observable.merge(
     ...Object.values(behaviours).map(fn$ =>
       fn$({ state$ }).map(fn => ({ fn, type: fn$.name }))))
-  .do(({ fn, type }) => logAction({ type, payload: fn }))
-  .withLatestFrom(state$, ({ fn, type }, state) =>
-    fn(state)); // New state from action fn ie updateUserFn(latestState)
+  .withLatestFrom(state$, ({ fn, type }, state) => {
+    const newState = fn(state); // New state from action fn ie updateUserFn(latestState)
+    logAction({ type, payload: newState });
+    return newState;
+  })
+  .retry(1000);
 
 // History location
 export const history = createBrowserHistory();
