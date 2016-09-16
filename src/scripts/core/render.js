@@ -11,7 +11,4 @@ export const render = (stream$) =>
   Observable.of(document.getElementById('app'), h('div'))
     .merge(stream$)
     .pairwise()
-    .subscribe({
-      next: (nodes) => patch(...nodes),
-      error: err => console.error(err)
-    });
+    .subscribe(nodes => patch(...nodes));
