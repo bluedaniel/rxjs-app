@@ -30,10 +30,8 @@ export const request = (fnRequest, actions, {
   retry = 2,
   immediate = () => Observable.of(globalStore.toggleLoading(true, 'Fetching')),
   unauthorized = $ => $.do(_ => { window.location.href = '/'; }),
-  error = $ => $.do(({ errors }) => (errors || [{ message: 'fetch :(' }]).map(({ message }) => {
-    // debugger;
-    actions.ERROR$.next({ message });
-  }))
+  error = $ => $.do(({ errors }) => (errors || [{ message: 'fetch ¯\\_(ツ)_/¯' }])
+    .map(({ message }) => { actions.ERROR$.next({ message }); }))
   .map(() => identity),
   success = () => identity,
   always = () => Observable.of(globalStore.toggleLoading(false, 'Fetching'))
@@ -51,7 +49,6 @@ export const request = (fnRequest, actions, {
           return Observable.timer(i * 1000);
         }))
     .catch(err => Observable.of({ errors: [ err ] }))
-    .share()
     .onErrorResumeNext();
 
   // Filters for emitting the correct success/auth/error stream from request
@@ -59,16 +56,13 @@ export const request = (fnRequest, actions, {
     unauthorized(request$.filter(unauthorizedCheck)),
     error(request$.filter(errorCheck)),
     success(request$.filter(successCheck))
-  );
+  ).share();
 
   const onImmediate$ = immediate();
 
   return onImmediate$ ? onImmediate$.merge(
     onImmediate$.mergeMap(() => onResponse$),
-    onResponse$.mergeMap(() => {
-      debugger;
-      return always();
-    })
+    onResponse$.mergeMap(always)
   ) : onResponse$;
 };
 
