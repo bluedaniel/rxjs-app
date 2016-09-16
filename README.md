@@ -22,6 +22,11 @@ Features
 - Lightweight Express development server with authentication
 - Simple Dockerfile to host the app with Nginx.
 
+Known issues
+---
+
+There is a problem with the package `postcss-import`, the issue is described [here](https://github.com/postcss/postcss-import/issues/207) and can be solved by installing version `8.1.0`.
+
 Run
 ---
 

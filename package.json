@@ -51,7 +51,7 @@
     "babel": "inherit"
   },
   "dependencies": {
-    "history": "^4.0.1",
+    "history": "^4.2.0",
     "ramda": "^0.22.1",
     "rxjs": "^5.0.0-beta.11",
     "snabbdom": "^0.5.2",
@@ -72,7 +72,7 @@
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.25.0",
     "eslint": "^3.4.0",
-    "eslint-config-standard": "^6.0.0",
+    "eslint-config-standard": "^6.0.1",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
     "express": "^4.14.0",
@@ -83,14 +83,14 @@
     "lost": "^7.1.0",
     "morgan": "^1.7.0",
     "normalize.css": "^4.2.0",
-    "nyc": "^8.1.0",
+    "nyc": "^8.3.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "postcss": "^5.1.2",
     "postcss-cssnext": "^2.6.0",
     "postcss-custom-media": "^5.0.1",
     "postcss-font-magician": "^1.4.0",
-    "postcss-import": "^8.1.0",
+    "postcss-import": "8.1.0",
     "postcss-loader": "^0.13.0",
     "postcss-nested": "^1.0.0",
     "postcss-url": "^5.1.2",
@@ -99,6 +99,6 @@
     "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.21",
     "webpack-bundle-size-analyzer": "^2.0.2",
-    "webpack-dev-server": "^1.15.1"
+    "webpack-dev-server": "^1.15.2"
   }
 }
