@@ -50,6 +50,7 @@ const renderHtml = loginRequired => (req, res) => {
 const apiOK = (results) => ({ status: 200, errors: [], results });
 const apiError = (errors) => ({ status: 200, errors, results: [] });
 
+// Test the application by giving it unexpected format (no errors/results props)
 const apiUnexpected = () => ({ status: 200, test: 'test', test2: {} });
 
 app.get('/', renderHtml());
@@ -98,7 +99,10 @@ app.get('/api/user', (req, res, next) => {
 });
 
 app.get('/api/search', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
-  // res.json(apiOK(searchData));
+  res.json(apiOK(searchData));
+});
+
+app.get('/api/search/error', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
   res.json(apiUnexpected());
 });
 

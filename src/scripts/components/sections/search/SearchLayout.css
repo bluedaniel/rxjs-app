@@ -4,6 +4,12 @@
   padding: 20px 15px;
 }
 
+:global(.btn).fetchError {
+  display: inline-block;
+  margin: 0 15px 15px;
+  max-width: 100%;
+}
+
 .tagline {
   padding-top: 0;
 }
