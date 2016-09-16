@@ -9,21 +9,20 @@ In this boilerplate app, the `state$` ultimately performs a simple Snabbdom patc
 
 Features
 --------
-- Hyperscript, with some useful utilities, for creating components
+- Hyperscript, with some useful utilities, for creating components.
 - Webpack v2 config with:
-  - Tree-shaking
-  - Bundle splitting (one each for guests & authenticated users)
-  - PostCSS with plugins
-  - CSS Modules
+  - Tree-shaking.
+  - Bundle splitting (one each for guests & authenticated users).
+  - PostCSS with plugins.
+  - CSS Modules.
 - RxJs v5 brings improvements in speed, features, documentation and modular builds.
 - Uses Ramda for composable state changes and stitching composite views.
 - Modern testing with Ava
-- Robust linting using Eslint & Stylelint.
-- Lightweight Express development server with authentication
-- Simple Dockerfile to host the app with Nginx.
+- Robust linting using Eslint & Stylelint, with standad configs.
+- Simple Express development server with authentication example.
 
 Known issues
----
+------------
 
 There is a problem with the package `postcss-import`, the issue is described [here](https://github.com/postcss/postcss-import/issues/207) and can be solved by installing version `8.1.0`.
 
