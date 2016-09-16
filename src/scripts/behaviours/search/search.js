@@ -9,6 +9,5 @@ export const search$ = () =>
   .map(compose(join(''), prop('params')))
   .mergeMap(searchVal =>
     request(() => get(`${URLS.getSearch}/${searchVal}`), actions, {
-      success: $ => $.map(prop('results'))
-        .map(searchStore.updateResults)
+      success: $ => $.map(compose(searchStore.updateResults, prop('results')))
     }));

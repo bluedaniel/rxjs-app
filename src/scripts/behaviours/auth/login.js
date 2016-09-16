@@ -13,10 +13,8 @@ export const login$ = () =>
   })
   .mergeMap(body => {
     return request(() => post(URLS.login, { body }), actions, {
-      success: $ => $.do(a => console.log(a)).map(compose(head, prop('results')))
-
+      success: $ => $.map(compose(head, prop('results')))
         .do(() => {
-          console.log('go!');
           window.location.href = '/';
         })
         .map(() => identity)

@@ -5,8 +5,7 @@ import { URLS } from 'constants/URLS';
 export const logout$ = () =>
   actions.LOGOUT$.mergeMap(() =>
     request(() => post(URLS.logout), actions, {
-      success: $ => $.do(() => {
+      success: $ => $.delay(500).do(() => {
         window.location.href = '/';
       })
-      .delay(2000)
     }));
