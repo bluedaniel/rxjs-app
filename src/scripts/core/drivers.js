@@ -1,12 +1,7 @@
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { createBrowserHistory } from 'history';
 import * as stores from 'stores/';
 import { onRouteActions } from 'core/router';
 import { identity, logAction } from 'core/utils';
-
-// Main state stream
-export const state$ = new BehaviorSubject();
 
 // Initial state
 export const stateDriver = () => {
@@ -39,16 +34,18 @@ export const behaviourDriver = (state$, behaviours) =>
   })
   .retry(1000);
 
-// History location
-export const history = createBrowserHistory();
+// History location driver & event listener
+export const historyDriver = (history$, state$, guest) => {
+  // Add event listener for browser events (back/forward)
+  window.addEventListener('popstate', ({ state }) => {
+    if (state === undefined) return; // Ignore extraneous popstate events in WebKit.
+    history$.next(window.location.pathname);
+  });
 
-export const historyDriver = (state$, guest) => {
-  const history$ = Observable.create(observer =>
-    history.listen(location => observer.next(location)))
-  .startWith(history.location);
-
-  return history$.withLatestFrom(state$, ({ pathname }, state) =>
+  return history$
+  .startWith(window.location.pathname)
+  .filter(identity)
+  .withLatestFrom(state$, (pathname, state) =>
     // Actions on routes, ie /logout should perform at least api call & redirect
-    onRouteActions({ state, pathname }, guest))
-  .filter(identity);
+    onRouteActions({ state, pathname }, guest));
 };

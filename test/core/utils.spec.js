@@ -1,5 +1,5 @@
-import test from 'ava';
-import { classSet, noop, safe } from 'core/utils';
+import { test } from 'ava';
+import { classSet, noop, safe, coerceArray, addBasicMeta } from '../../src/scripts/core/utils';
 
 test('[core/utils] classSet', t => {
   t.is(classSet('foobar'), '.foobar');
@@ -23,4 +23,17 @@ test('[core/utils] noop', t => {
   t.is(noop(), undefined);
   t.is(noop(true), undefined);
   t.is(noop([]), undefined);
+});
+
+test('[core/utils] coerceArray', t => {
+  t.deepEqual(coerceArray(1), [ 1 ]);
+  t.deepEqual(coerceArray([1]), [ 1 ]);
+  t.deepEqual(coerceArray([]), []);
+});
+
+test('[core/utils] addBasicMeta', t => {
+  const meta = addBasicMeta({ t: 'test' });
+  t.is(typeof meta, 'object');
+  t.truthy(meta.id);
+  t.truthy(meta.time);
 });

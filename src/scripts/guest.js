@@ -1,5 +1,6 @@
 import 'core/rxBindings';
-import { state$, stateDriver, historyDriver, behaviourDriver } from 'core/drivers';
+import { state$, history$ } from 'core/subjects';
+import { stateDriver, historyDriver, behaviourDriver } from 'core/drivers';
 import * as guestBehaviours from 'behaviours/guestBehaviours';
 import { main } from './main';
 import { render } from 'core/render';
@@ -10,7 +11,7 @@ const guest = true;
 const DOM$ = main({
   state$,
   initState$: stateDriver(),
-  history$: historyDriver(state$, guest),
+  history$: historyDriver(history$, state$, guest),
   behaviours$: behaviourDriver(state$, guestBehaviours)
 });
 

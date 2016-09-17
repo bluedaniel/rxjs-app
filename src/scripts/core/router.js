@@ -1,10 +1,13 @@
+import { history$ } from 'core/subjects';
 import { actions } from 'actions/';
-import { history } from 'core/drivers';
 import { compose, equals, filter, head, slice, identity, match } from 'core/utils';
 import { guestRoutes, appRoutes } from 'routes/';
 
 // link function used to route inside the app using history
-export const link = path => history.push(path);
+export const link = path => {
+  window.history.pushState(null, null, path);
+  history$.next(path);
+};
 
 // Main state uses this to find the matching view component
 export const getView = route => appRoutes[route].view;
