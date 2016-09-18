@@ -83,12 +83,14 @@ const formatTime = (t = new Date()) =>
   ]);
 
 export const logAction = ({ type, payload }) => {
+  if (process.env.NODE_ENV !== 'development') return;
   group(`%c action @ ${formatTime()} ${type}`, 'color:#3E38EA;font-weight:normal;');
   log(payload);
   groupEnd();
 };
 
 export const logState = (state) => {
+  if (process.env.NODE_ENV !== 'development') return;
   group(`%c render @ ${formatTime()}`, 'color:#3990D3;font-weight:normal;');
   log(state);
   groupEnd();

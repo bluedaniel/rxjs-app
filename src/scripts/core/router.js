@@ -9,9 +9,6 @@ export const link = path => {
   history$.next(path);
 };
 
-// Main state uses this to find the matching view component
-export const getView = route => appRoutes[route].view;
-
 // This function runs on every history observable change
 // It will run actions if there is a route change that calls for them ie Logout
 export const onRouteActions = ({

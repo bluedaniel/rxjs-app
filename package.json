@@ -14,9 +14,8 @@
   },
   "homepage": "https://github.com/bluedaniel/rxjs-app#readme",
   "scripts": {
-    "test1": "CONFIG=$(pwd)/webpack.config.test.js BABEL_DISABLE_CACHE=1 NODE_ENV=test ava",
-    "test": "npm lint && NODE_PATH=src/scripts nyc ava --verbose",
-    "test:watch": "NODE_PATH=src/scripts ava --watch --verbose",
+    "test": "CONFIG=$(pwd)/webpack.config.test.js BABEL_DISABLE_CACHE=1 NODE_ENV=test nyc ava --verbose",
+    "test1": "npm run lint && NODE_PATH=src/scripts nyc ava --verbose",
     "report": "npm test && nyc report --reporter=html",
     "build": "NODE_ENV=production webpack --json > stats.json",
     "build-size": "npm run build && cat stats.json | webpack-bundle-size-analyzer",
@@ -49,15 +48,14 @@
     }
   },
   "ava": {
+    "require": [
+      "./test/helpers/setup-test-env.js"
+    ],
     "files": [
       "test/**/*.spec.js"
     ],
     "failFast": true,
-    "verbose": true,
-    "require": [
-      "babel-register"
-    ],
-    "babel": "inherit"
+    "verbose": true
   },
   "dependencies": {
     "ramda": "^0.22.1",
@@ -89,6 +87,7 @@
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "file-loader": "^0.9.0",
     "font-awesome": "^4.6.3",
+    "jsdom": "^9.5.0",
     "lost": "^7.1.0",
     "morgan": "^1.7.0",
     "normalize.css": "^4.2.0",
