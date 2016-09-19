@@ -14,8 +14,7 @@
   },
   "homepage": "https://github.com/bluedaniel/rxjs-app#readme",
   "scripts": {
-    "test": "CONFIG=$(pwd)/webpack.config.test.js BABEL_DISABLE_CACHE=1 NODE_ENV=test nyc ava --verbose",
-    "test1": "npm run lint && NODE_PATH=src/scripts nyc ava --verbose",
+    "test": "npm run lint && CONFIG=$(pwd)/webpack.config.test.js BABEL_DISABLE_CACHE=1 NODE_ENV=test nyc ava --verbose",
     "report": "npm test && nyc report --reporter=html",
     "build": "NODE_ENV=production webpack --json > stats.json",
     "build-size": "npm run build && cat stats.json | webpack-bundle-size-analyzer",
