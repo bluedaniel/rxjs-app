@@ -26,7 +26,7 @@ Features
 Known issues
 ------------
 
-There is a problem with the package `postcss-import`, the issue is described [here](https://github.com/postcss/postcss-import/issues/207) and can be solved by installing version `8.1.0`.
+There is a problem with the package `postcss-import`, the issue is [described here](https://github.com/postcss/postcss-import/issues/207) and can be solved by installing version `8.1.0`.
 
 Run
 ---
@@ -42,13 +42,20 @@ $ node server
 
 ````
 
-Profile
--------
+Other scripts
+-------------
 
-This command will show you what makes up the size of the bundles. Useful to see the effect of modular builds (i.e. Ramda and RxJs).
 
 ````bash
+# Testing with Ava
+$ npm test
+
+# Test coverage with Ava/Nyc
+$ npm run coverage
+
+# This command will show you what makes up the size of the bundles.
+# Useful to see the effect of modular builds (i.e. Ramda and RxJs).
+# Note: You will also have a `stats.json` in the project root which you can use
+# at https://webpack.github.io/analyse, among others.
 $ npm run build-size
 ````
-
-Note: You will also have a `stats.json` in the project root which you can use at [https://webpack.github.io/analyse/](https://webpack.github.io/analyse/), among others.
