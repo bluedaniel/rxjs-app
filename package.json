@@ -14,23 +14,12 @@
   },
   "homepage": "https://github.com/bluedaniel/rxjs-app#readme",
   "scripts": {
-    "test": "NODE_PATH=./src/scripts NODE_ENV=test ava --verbose",
-    "coverage": "NODE_PATH=./src/scripts NODE_ENV=test nyc ava --verbose && nyc report --reporter=html",
+    "test": "NODE_PATH=./src/scripts NODE_ENV=test ava -r ./test/helpers/setup-test-env.js -r ./test/helpers/css-hook.js test/**/*.spec.js -v",
+    "coverage": "NODE_PATH=./src/scripts NODE_ENV=test nyc ava -r ./test/helpers/setup-test-env.js -r ./test/helpers/css-hook.js test/**/*.spec.js && nyc report --reporter=html",
     "build": "NODE_ENV=production webpack --json > stats.json",
     "build-size": "npm run build && cat stats.json | webpack-bundle-size-analyzer",
     "watch": "webpack-dev-server --content-base public --port 3000",
     "lint": "stylelint \"src/**/*.css\" && eslint --ext .js --ext .jsx src/scripts"
-  },
-  "ava": {
-    "require": [
-      "./test/helpers/setup-test-env.js",
-      "./test/helpers/css-hook.js"
-    ],
-    "files": [
-      "test/**/*.spec.js"
-    ],
-    "failFast": true,
-    "verbose": true
   },
   "dependencies": {
     "ramda": "^0.22.1",
