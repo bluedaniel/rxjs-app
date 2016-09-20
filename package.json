@@ -21,31 +21,6 @@
     "watch": "webpack-dev-server --content-base public --port 3000",
     "lint": "stylelint \"src/**/*.css\" && eslint --ext .js --ext .jsx src/scripts"
   },
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-2"
-    ],
-    "plugins": [
-      "transform-runtime"
-    ],
-    "env": {
-      "development": {
-        "sourceMaps": "inline"
-      },
-      "test": {
-        "plugins": [
-          [
-            "babel-plugin-webpack-loaders",
-            {
-              "config": "${CONFIG}",
-              "verbose": false
-            }
-          ]
-        ]
-      }
-    }
-  },
   "ava": {
     "require": [
       "./test/helpers/setup-test-env.js"
