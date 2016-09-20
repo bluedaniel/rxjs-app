@@ -4,14 +4,6 @@
   "env": {
     "development": {
       "sourceMaps": "inline"
-    },
-    "test": {
-      "plugins": [
-        [ "babel-plugin-webpack-loaders", {
-          "config": "${CONFIG}",
-          "verbose": false
-        } ]
-      ]
     }
   }
 }

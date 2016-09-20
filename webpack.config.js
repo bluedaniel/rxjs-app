@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const postCSSPlugins = require('./postcss.plugins');
 
 const DEBUG = process.env.NODE_ENV !== 'production';
 
@@ -79,17 +80,7 @@ module.exports = {
       require('postcss-import')({
         addDependencyTo: webpack
       }),
-      require('postcss-url')(),
-      require('postcss-nested')(),
-      require('postcss-custom-media')({
-        extensions: {
-          '--viewport-large': '(width >= 500px)'
-        },
-        preserve: true
-      }),
-      require('postcss-cssnext')(),
-      require('postcss-font-magician')(),
-      require('lost')()
+      ...postCSSPlugins
     ];
   },
   devServer: {
