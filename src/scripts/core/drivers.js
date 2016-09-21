@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs/Observable';
 import * as stores from 'stores/';
 import { onRouteActions } from 'core/router';
-import { identity, logAction } from 'core/utils';
+import { identity } from 'core/utils';
+import { logger } from 'core/logger';
 
 // Initial state
 export const stateDriver = () => {
@@ -29,7 +30,7 @@ export const behaviourDriver = (state$, behaviours) =>
       fn$({ state$ }).map(fn => ({ fn, type: fn$.name }))))
   .withLatestFrom(state$, ({ fn, type }, state) => {
     const newState = fn(state); // New state from action fn ie updateUserFn(latestState)
-    logAction({ type, payload: newState });
+    logger({ type, payload: newState });
     return newState;
   })
   .retry(1000);

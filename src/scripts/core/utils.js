@@ -51,50 +51,17 @@ export const safe = (fn, or = undefined) => {
 
 export const coerceArray = unless(isArrayLike, of);
 
-const padEnd = (n, c = '0') => v =>
-  String(v).length >= n ? '' + v : (String(c).repeat(n) + v).slice(-n);
-
 export const classSet = (...args) => {
   const cn = arg => {
     if (Array.isArray(arg)) return arg.map(cn);
-    return is(Object, arg) ? compose(join('.'), map(head), filter(x => x[1]), Object.entries)(arg) : arg;
+    return is(Object, arg)
+      ? compose(join('.'), map(head), filter(x => x[1]), Object.entries)(arg)
+      : arg;
   };
   return compose(once(x => `.${x}`), trim, join('.'), filter(identity), map(cn))(args);
 };
 
 export const addBasicMeta = e => merge({ id: uuid(), time: Date.now() }, e);
-
-/* eslint-disable no-console */
-export const log = console.log.bind(console);
-export const info = console.info.bind(console);
-export const warn = console.warn.bind(console);
-export const error = console.error.bind(console);
-export const time = (console.time ? console.time : console.log).bind(console);
-export const timeEnd = (console.timeEnd ? console.timeEnd : console.log).bind(console);
-export const group = (console.groupCollapsed ? console.groupCollapsed : console.log).bind(console);
-export const groupEnd = (console.groupEnd ? console.groupEnd : console.log).bind(console);
-/* eslint-enable no-console */
-
-export const rlog = tap(log);
-
-const formatTime = (t = new Date()) =>
-  compose(join(':'), map(padEnd(2)))([
-    t.getHours(), t.getMinutes(), t.getSeconds(), t.getMilliseconds()
-  ]);
-
-export const logAction = ({ type, payload }) => {
-  if (process.env.NODE_ENV !== 'development') return;
-  group(`%c action @ ${formatTime()} ${type}`, 'color:#3E38EA;font-weight:normal;');
-  log(payload);
-  groupEnd();
-};
-
-export const logState = (state) => {
-  if (process.env.NODE_ENV !== 'development') return;
-  group(`%c render @ ${formatTime()}`, 'color:#3990D3;font-weight:normal;');
-  log(state);
-  groupEnd();
-};
 
 // Hyperscript helper
 const isSelector = param => {

@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { globalStore } from 'stores/';
-import { identity, not, compose, filter, propOr, isEmpty, propEq, is, warn } from 'core/utils';
+import { identity, not, compose, filter, propOr, isEmpty, propEq, is } from 'core/utils';
+import { warn } from 'core/logger';
 import 'whatwg-fetch';
 
 const f = method => (url, data = {}) =>
@@ -43,7 +44,7 @@ export const request = (fnRequest, actions, {
         .do(([ i, { response } ]) => warn(`Error fetching ${response}, retrying in ${i} second(s)`))
         .mergeMap(([ i, err ]) => {
           if (i === retry) {
-            console.log(err);
+            warn(err);
             throw err.statusText;
           }
           return Observable.timer(i * 1000);
