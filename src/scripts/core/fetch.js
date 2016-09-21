@@ -41,10 +41,11 @@ export const request = (fnRequest, actions, {
     .retryWhen(errors$ =>
       // Incremental back-off strategy
       Observable.zip(Observable.range(1, retry), errors$)
-        .do(([ i, { response } ]) => warn(`Error fetching ${response}, retrying in ${i} second(s)`))
+        .do(([ i, { response } ]) =>
+          process.env.NODE_ENV === 'development' && warn(`Error fetching ${response}, retrying in ${i} second(s)`))
         .mergeMap(([ i, err ]) => {
           if (i === retry) {
-            warn(err);
+            process.env.NODE_ENV === 'development' && warn(err);
             throw err.statusText;
           }
           return Observable.timer(i * 1000);
