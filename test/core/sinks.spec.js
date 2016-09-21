@@ -19,17 +19,17 @@ const observableWithRoute = (currentRoute = '/') =>
     , 1000 / 59);
   });
 
-test('[core/sinks] DOM$ empty', t => {
+test('DOM$ empty', t => {
   t.plan(0);
   return DOM$(Rx.Observable.of(null));
 });
 
-test('[core/sinks] DOM$ defaultState', t => {
+test('DOM$ defaultState', t => {
   t.plan(0);
   return DOM$(Rx.Observable.of(defaultState));
 });
 
-test.cb('[core/sinks] DOM$ route `/`', t => {
+test.cb('DOM$ route `/`', t => {
   t.plan(3);
   DOM$(observableWithRoute('/'))
   .take(1)
@@ -41,7 +41,7 @@ test.cb('[core/sinks] DOM$ route `/`', t => {
   });
 });
 
-test.cb('[core/sinks] DOM$ route `/account`', t => {
+test.cb('DOM$ route `/account`', t => {
   t.plan(3);
   DOM$(observableWithRoute('/account'))
   .take(1)

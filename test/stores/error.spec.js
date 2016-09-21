@@ -5,11 +5,11 @@ import { errorStore } from '../../src/scripts/stores/error';
 const viewErrors = view(lensPath([ 'errorStore', 'errors' ]));
 const defaultState = { errorStore: errorStore.defaultState() };
 
-test('[core/stores/error] getTimeout', t => {
+test('getTimeout', t => {
   t.is(errorStore.getTimeout(), 4000);
 });
 
-test('[core/stores/error] addError', t => {
+test('addError', t => {
   const newState = compose(
     errorStore.addError({ message: '¯\_(ツ)_/¯' })
   )(defaultState);
@@ -19,7 +19,7 @@ test('[core/stores/error] addError', t => {
   t.is(viewErrors(newState)[0].message, '¯\_(ツ)_/¯');
 });
 
-test('[core/stores/error] removeError', t => {
+test('removeError', t => {
   const newState = compose(
     errorStore.addError({ message: 'err2' }),
     errorStore.addError({ message: 'err1' })
@@ -32,7 +32,7 @@ test('[core/stores/error] removeError', t => {
   t.is(viewErrors(finalState)[0].message, 'err2');
 });
 
-test('[core/stores/error] removeErrors', t => {
+test('removeErrors', t => {
   const time = Date.now() - (errorStore.getTimeout() * 1.1);
   const newState = compose(
     errorStore.addError({ time, message: 'err3' }),

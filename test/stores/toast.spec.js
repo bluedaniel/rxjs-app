@@ -5,11 +5,11 @@ import { toastStore } from '../../src/scripts/stores/toast';
 const viewToasts = view(lensPath([ 'toastStore', 'toasts' ]));
 const defaultState = { toastStore: toastStore.defaultState() };
 
-test('[core/stores/toast] getTimeout', t => {
+test('getTimeout', t => {
   t.is(toastStore.getTimeout(), 5000);
 });
 
-test('[core/stores/toast] addToast', t => {
+test('addToast', t => {
   const newState = compose(
     toastStore.addToast({ message: '¯\_(ツ)_/¯' })
   )(defaultState);
@@ -19,7 +19,7 @@ test('[core/stores/toast] addToast', t => {
   t.is(viewToasts(newState)[0].message, '¯\_(ツ)_/¯');
 });
 
-test('[core/stores/toast] removeToasts', t => {
+test('removeToasts', t => {
   const time = Date.now() - (toastStore.getTimeout() * 1.1);
   const newState = compose(
     toastStore.addToast({ time, message: 'toasty3' }),

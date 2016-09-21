@@ -1,7 +1,7 @@
 import { test } from 'ava';
 import { classSet, noop, safe, coerceArray, addBasicMeta } from '../../src/scripts/core/utils';
 
-test('[core/utils] classSet', t => {
+test('classSet', t => {
   t.is(classSet('foobar'), '.foobar');
   t.is(classSet('foo', 'bar'), '.foo.bar');
   t.is(classSet('foo', { bar: true }), '.foo.bar');
@@ -13,25 +13,25 @@ test('[core/utils] classSet', t => {
   t.is(classSet(null, false, 'bar', undefined, 0, 1, { baz: null }, ''), '.bar.1');
 });
 
-test('[core/utils] safe', t => {
+test('safe', t => {
   t.is(safe(() => 'hello'), 'hello');
   t.is(safe(() => foo), undefined);
   t.is(safe(() => bar, 'baz'), 'baz');
 });
 
-test('[core/utils] noop', t => {
+test('noop', t => {
   t.is(noop(), undefined);
   t.is(noop(true), undefined);
   t.is(noop([]), undefined);
 });
 
-test('[core/utils] coerceArray', t => {
+test('coerceArray', t => {
   t.deepEqual(coerceArray(1), [ 1 ]);
   t.deepEqual(coerceArray([1]), [ 1 ]);
   t.deepEqual(coerceArray([]), []);
 });
 
-test('[core/utils] addBasicMeta', t => {
+test('addBasicMeta', t => {
   const meta = addBasicMeta({ t: 'test' });
   t.is(typeof meta, 'object');
   t.truthy(meta.id);
