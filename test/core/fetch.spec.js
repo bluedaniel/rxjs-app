@@ -1,8 +1,8 @@
 import { test } from 'ava';
 import fetchMock from 'fetch-mock';
-import { apiResp } from '../helpers/apiResp';
 import { noop, head } from 'core/utils';
 import { request, get, post } from 'core/fetch';
+import { apiResp } from '../helpers/apiResp';
 
 const [ mockSuccess, mockError ] = [ 'http://success.com', 'http://error.com' ];
 

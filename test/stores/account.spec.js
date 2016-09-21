@@ -1,8 +1,8 @@
 import { test } from 'ava';
 import fetchMock from 'fetch-mock';
-import { apiResp } from '../helpers/apiResp';
 import { compose, view, lensPath, prop, head } from 'core/utils';
 import { accountStore } from 'stores/account';
+import { apiResp } from '../helpers/apiResp';
 
 const viewUser = view(lensPath([ 'accountStore', 'user' ]));
 
