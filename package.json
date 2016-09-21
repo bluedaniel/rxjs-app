@@ -15,7 +15,7 @@
   "homepage": "https://github.com/bluedaniel/rxjs-app#readme",
   "scripts": {
     "test": "NODE_PATH=./src/scripts NODE_ENV=test ava -r ./test/helpers/setup-env.js test/**/*.spec.js -v",
-    "coverage": "NODE_PATH=./src/scripts NODE_ENV=test nyc ava -r ./test/helpers/setup-env.js test/**/*.spec.js && nyc report --reporter=html",
+    "coverage": "NODE_PATH=./src/scripts NODE_ENV=test nyc ava -r ./test/helpers/setup-env.js test/**/*.spec.js && nyc report --reporter=text-lcov | coveralls",
     "build": "NODE_ENV=production webpack --json > stats.json",
     "build-size": "npm run build && cat stats.json | webpack-bundle-size-analyzer",
     "watch": "webpack-dev-server --content-base public --port 3000",
@@ -40,6 +40,7 @@
     "body-parser": "^1.15.2",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
+    "coveralls": "^2.11.14",
     "css-loader": "^0.25.0",
     "css-modules-require-hook": "^4.0.3",
     "eslint": "^3.4.0",

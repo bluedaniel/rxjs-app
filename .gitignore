@@ -49,3 +49,5 @@ public/*.eot
 public/*.woff
 public/*.svg
 public/*.woff2
+
+.coveralls.yml
