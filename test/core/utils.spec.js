@@ -1,5 +1,5 @@
 import { test } from 'ava';
-import { classSet, noop, safe, coerceArray, addBasicMeta } from '../../src/scripts/core/utils';
+import { classSet, noop, safe, coerceArray, addBasicMeta } from 'core/utils';
 
 test('classSet', t => {
   t.is(classSet('foobar'), '.foobar');

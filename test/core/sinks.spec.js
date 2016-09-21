@@ -1,9 +1,9 @@
 import Rx from 'rxjs/Rx';
 import { test } from 'ava';
 import { compose, over, lensProp, last, match, prop } from 'ramda';
-import { rlog } from '../../src/scripts/core/utils';
-import * as stores from '../../src/scripts/stores';
-import { DOM$ } from '../../src/scripts/core/sinks';
+import { rlog } from 'core/utils';
+import * as stores from 'stores/';
+import { DOM$ } from 'core/sinks';
 
 const defaultState = Object.entries(stores).reduce((acc, [ k, v ]) =>
   ({ ...acc, [k]: v.defaultState() }), {});

@@ -5,7 +5,7 @@
  */
 require('babel-register');
 require('babel-polyfill');
-require('../../src/scripts/core/rxBindings');
+require('core/rxBindings');
 
 const hook = require('css-modules-require-hook');
 const postCSSPlugins = require('../../postcss.plugins');

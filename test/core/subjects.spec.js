@@ -1,6 +1,6 @@
 import Rx from 'rxjs/Rx';
 import { test } from 'ava';
-import * as subjects from '../../src/scripts/core/subjects';
+import * as subjects from 'core/subjects';
 
 test('subjects', t => {
   const kvSubjects = Object.entries(subjects);

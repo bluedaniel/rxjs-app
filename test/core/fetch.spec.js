@@ -1,8 +1,8 @@
 import { test } from 'ava';
 import fetchMock from 'fetch-mock';
 import { apiResp } from '../helpers/apiResp';
-import { noop, head } from '../../src/scripts/core/utils';
-import { request, get, post } from '../../src/scripts/core/fetch';
+import { noop, head } from 'core/utils';
+import { request, get, post } from 'core/fetch';
 
 const [ mockSuccess, mockError ] = [ 'http://success.com', 'http://error.com' ];
 
@@ -41,7 +41,7 @@ test('request get/error', t =>
   }));
 
 test('request post/error', t =>
-  request(() => post(mockError), {}, {
+  request(() => post(mockError, { mock: 'data' }), {}, {
     error: $ => $.map(({ errors }) => head(errors))
       .map(({ message }) => t.is(message, 'post/fail'))
   }));

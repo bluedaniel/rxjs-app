@@ -1,6 +1,6 @@
 import { test } from 'ava';
 import { compose, view, lensPath } from 'core/utils';
-import { toastStore } from '../../src/scripts/stores/toast';
+import { toastStore } from 'stores/toast';
 
 const viewToasts = view(lensPath([ 'toastStore', 'toasts' ]));
 const defaultState = { toastStore: toastStore.defaultState() };

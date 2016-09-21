@@ -1,6 +1,6 @@
 import { test } from 'ava';
 import { compose, view, lensPath, prop, head } from 'core/utils';
-import { errorStore } from '../../src/scripts/stores/error';
+import { errorStore } from 'stores/error';
 
 const viewErrors = view(lensPath([ 'errorStore', 'errors' ]));
 const defaultState = { errorStore: errorStore.defaultState() };
