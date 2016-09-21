@@ -34,7 +34,7 @@ export const request = (fnRequest, actions, {
   error = $ => $.do(({ errors }) => (errors || [{ message: 'fetch ¯\\_(ツ)_/¯' }])
     .map(({ message }) => { actions.ERROR$.next({ message }); }))
   .map(() => identity),
-  success = () => identity,
+  success = () => Observable.of(identity),
   always = () => Observable.of(globalStore.toggleLoading(false, 'Fetching'))
 }) => {
   const request$ = Observable.defer(fnRequest)

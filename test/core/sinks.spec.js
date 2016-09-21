@@ -1,4 +1,3 @@
-import '../../src/scripts/core/rxBindings';
 import Rx from 'rxjs/Rx';
 import { test } from 'ava';
 import { compose, over, lensProp, last, match, prop } from 'ramda';
