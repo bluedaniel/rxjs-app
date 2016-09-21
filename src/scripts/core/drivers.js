@@ -30,7 +30,7 @@ export const behaviourDriver = (state$, behaviours) =>
       fn$({ state$ }).map(fn => ({ fn, type: fn$.name }))))
   .withLatestFrom(state$, ({ fn, type }, state) => {
     const newState = fn(state); // New state from action fn ie updateUserFn(latestState)
-    logger({ type, payload: newState });
+    logger({ type, payload: fn, state, newState });
     return newState;
   })
   .retry(1000);

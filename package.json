@@ -58,6 +58,7 @@
     "node-fetch": "^1.6.1",
     "normalize.css": "^4.2.0",
     "nyc": "^8.3.0",
+    "objectdiff": "^1.1.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "postcss": "^5.1.2",

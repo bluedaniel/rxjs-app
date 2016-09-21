@@ -11,7 +11,7 @@ export const DOM$ = state$ =>
   .filter(identity)
   .filter(({ routeStore: { currentRoute } }) => currentRoute)
   .sampleTime(1000 / 60) // Rerender at a maximum of 60fps
-  .do(logger)
+  .do(state => logger({ state }))
   .map(state => {
     // Get the view that the router wants
     const { routeStore: { currentRoute } } = state;
