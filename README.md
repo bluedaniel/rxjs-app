@@ -1,5 +1,4 @@
 [![Build Status](https://s3-eu-west-1.amazonaws.com/lambci-buildresults-1wp4fayx70af6/gh/bluedaniel/rxjs-app/branches/master/baa548e0d79020375c2c3a03c279caad.svg)](https://s3-eu-west-1.amazonaws.com/lambci-buildresults-1wp4fayx70af6/gh/bluedaniel/rxjs-app/branches/master/f5218d3c6406f04bc47f29154c5f11ce.html)
-
 [![Coverage Status](https://coveralls.io/repos/github/bluedaniel/rxjs-app/badge.svg?branch=master)](https://coveralls.io/github/bluedaniel/rxjs-app?branch=master)
 
 RxJs App
