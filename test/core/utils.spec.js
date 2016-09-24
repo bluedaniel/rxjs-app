@@ -1,16 +1,16 @@
 import { test } from 'ava';
-import { classSet, noop, safe, coerceArray, addBasicMeta } from 'core/utils';
+import { cx, noop, safe, coerceArray, addBasicMeta } from 'core/utils';
 
-test('classSet', t => {
-  t.is(classSet('foobar'), '.foobar');
-  t.is(classSet('foo', 'bar'), '.foo.bar');
-  t.is(classSet('foo', { bar: true }), '.foo.bar');
-  t.is(classSet({ 'foo-bar': true }), '.foo-bar');
-  t.is(classSet({ 'foo-bar': false }), '.');
-  t.is(classSet({ foo: true }, { bar: true }), '.foo.bar');
-  t.is(classSet({ foo: true, bar: true }), '.foo.bar');
-  t.is(classSet('foo', { bar: true, duck: false }, 'baz', { quux: true }), '.foo.bar.baz.quux');
-  t.is(classSet(null, false, 'bar', undefined, 0, 1, { baz: null }, ''), '.bar.1');
+test('cx', t => {
+  t.is(cx('foobar'), '.foobar');
+  t.is(cx('foo', 'bar'), '.foo.bar');
+  t.is(cx('foo', { bar: true }), '.foo.bar');
+  t.is(cx({ 'foo-bar': true }), '.foo-bar');
+  t.is(cx({ 'foo-bar': false }), '.');
+  t.is(cx({ foo: true }, { bar: true }), '.foo.bar');
+  t.is(cx({ foo: true, bar: true }), '.foo.bar');
+  t.is(cx('foo', { bar: true, duck: false }, 'baz', { quux: true }), '.foo.bar.baz.quux');
+  t.is(cx(null, false, 'bar', undefined, 0, 1, { baz: null }, ''), '.bar.1');
 });
 
 test('safe', t => {

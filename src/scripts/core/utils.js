@@ -51,7 +51,7 @@ export const safe = (fn, or = undefined) => {
 
 export const coerceArray = unless(isArrayLike, of);
 
-export const classSet = (...args) => {
+export const cx = (...args) => {
   const cn = arg => {
     if (Array.isArray(arg)) return arg.map(cn);
     return is(Object, arg)
