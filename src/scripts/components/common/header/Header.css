@@ -1,3 +1,5 @@
+@import "partials/variables";
+
 .header {
   align-items: center;
   background: linear-gradient(to right bottom, #485563, #29323c);
@@ -12,7 +14,7 @@
   width: calc(100% - 40px);
   z-index: 9999;
   > div {
-    color: #fafafa;
+    color: var(--whiteColor);
     flex: 1;
     font-size: 27px;
     text-align: center;

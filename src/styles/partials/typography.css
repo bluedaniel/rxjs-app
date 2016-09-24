@@ -1,7 +1,9 @@
+@import "partials/variables";
+
 body {
   word-wrap: break-word;
   hyphens: auto;
-  color: #29323c;
+  color: var(--textColor);
 }
 
 h1,
@@ -14,7 +16,7 @@ h6 {
   text-rendering: optimizeLegibility;
   line-height: 1;
   margin-top: 0;
-  color: #29323c;
+  color: var(--textColor);
   font-weight: 400;
 }
 

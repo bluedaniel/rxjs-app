@@ -29,26 +29,20 @@ test('DOM$ defaultState', t => {
   return DOM$(Rx.Observable.of(defaultState));
 });
 
-test.cb('DOM$ route `/`', t => {
-  t.plan(3);
+test('DOM$ route `/`', t =>
   DOM$(observableWithRoute('/'))
   .take(1)
-  .subscribe(({ sel, children }) => {
+  .map(({ sel, children }) => {
     t.truthy(compose(match(/^section.HomeLayout/), prop('sel'), last)(children));
     t.is(sel, 'div.page');
     t.is(children.length, 5);
-    t.end();
-  });
-});
+  }));
 
-test.cb('DOM$ route `/account`', t => {
-  t.plan(3);
+test('DOM$ route `/account`', t =>
   DOM$(observableWithRoute('/account'))
   .take(1)
-  .subscribe(({ sel, children }) => {
+  .map(({ sel, children }) => {
     t.truthy(compose(match(/^section.AccountLayout/), prop('sel'), last)(children));
     t.is(sel, 'div.page');
     t.is(children.length, 5);
-    t.end();
-  });
-});
+  }));

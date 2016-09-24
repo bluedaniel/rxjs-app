@@ -1,3 +1,5 @@
+@import "partials/variables";
+
 .loading {
   animation: backgroundGradient 20s ease infinite;
   background-size: 300% 300%;
@@ -11,7 +13,7 @@
   transform: translateX(-50%);
   z-index: 3;
   span {
-    color: #fff;
+    color: var(--whiteColor);
     display: inline-block;
     font-weight: 300;
     letter-spacing: 0.2px;
@@ -33,7 +35,7 @@
 .bounce1,
 .bounce2 {
   animation: sk-bounce 2s infinite ease-in-out;
-  background-color: white;
+  background-color: var(--whiteColor);
   border-radius: 50%;
   height: 100%;
   left: 0;

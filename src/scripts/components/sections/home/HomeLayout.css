@@ -1,3 +1,5 @@
+@import "partials/variables";
+
 .hero {
   > div {
     background: linear-gradient(to left, #134e5e, #71b280);
@@ -5,7 +7,7 @@
     padding: 130px 10px;
     text-align: center;
     h4 {
-      color: white;
+      color: var(--whiteColor);
       line-height: 1.2;
       margin-bottom: 50px;
     }

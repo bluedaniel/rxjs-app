@@ -6,15 +6,9 @@
 require('babel-register');
 require('babel-polyfill');
 require('core/rxBindings');
-
-const hook = require('css-modules-require-hook');
-const postCSSPlugins = require('../../postcss.plugins');
+require('css-modules-require-hook')({});
 
 global.fetch = require('node-fetch');
 global.document = require('jsdom').jsdom('<body></body>');
 global.window = document.defaultView;
 global.navigator = window.navigator;
-
-hook({
-  prepend: postCSSPlugins
-});
